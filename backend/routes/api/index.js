@@ -8,9 +8,9 @@ router.use('/users', usersRouter);
 //////
 // Test routes
 
-router.post('/test', function(req, res) {
-  res.json({ requestBody: req.body });
-});
+// router.post('/test', function(req, res) {
+//   res.json({ requestBody: req.body });
+// });
 
 // // GET /api/set-token-cookie
 // const asyncHandler = require('express-async-handler');
