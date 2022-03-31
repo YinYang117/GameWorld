@@ -13,9 +13,13 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
-if (!isProduction) { app.use(cors()) }; // enable cors only in development
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"})); // helmet helps set a variety of headers to better secure your app
-app.use( // Set the _csrf token and create req.csrfToken method
+//// Security
+// enable cors only in development
+if (!isProduction) { app.use(cors()) };
+// helmet helps set a variety of headers to better secure your app
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin"}));
+// Set the _csrf token and create req.csrfToken method
+app.use( 
   csurf({
     cookie: {
       secure: isProduction,
@@ -24,6 +28,7 @@ app.use( // Set the _csrf token and create req.csrfToken method
     }
   })
 );
+
 app.use(routes);
 
 
