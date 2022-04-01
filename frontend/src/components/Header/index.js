@@ -9,7 +9,7 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   const loginHandle = () => {
-    
+
   }
 
   let sessionLinks;
@@ -23,8 +23,7 @@ function Navigation({ isLoaded }){
   } else { // logged out or not registered
     sessionLinks = (
       <>
-        <button className="login-button">Login</button>
-        <button className="signup-button">Sign Up</button>
+        <WelcomeModal />
       </>
     );
   }
