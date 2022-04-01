@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
+// import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
+import Header from "./components/Header";
+import MainPage from "./components/MainPage";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,15 +16,9 @@ function App() {
 
   return isLoaded && (
     <>
-      <h1>Game World</h1>
-      <Navigation isLoaded={isLoaded} />
-    {isLoaded && ( 
-      <Switch>
-        <Route path="/signup">
-          <SignupFormPage />
-        </Route>
-      </Switch>
-    )}
+      <Header isLoaded={isLoaded} />
+      <MainPage />
+      <Footer />
     </>
   );
 }
