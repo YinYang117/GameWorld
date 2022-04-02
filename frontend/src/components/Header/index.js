@@ -1,32 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
 import WelcomeModal from '../WelcomeModal'
+import SignedInUser from '../SignedInUser'
 import './Header.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-
-  const loginHandle = () => {
-
-  }
-
   let sessionLinks;
-  if (sessionUser) { // logged in user
-    sessionLinks = (
-      <>
-        <div>Welcome {sessionUser.username}</div>
-        <ProfileButton user={sessionUser} />
-      </>
-    );
-  } else { // logged out or not registered
-    sessionLinks = (
-      <>
-        <WelcomeModal />
-      </>
-    );
-  }
+  if (sessionUser) {sessionLinks = (<SignedInUser />)} 
+  else sessionLinks = ( <WelcomeModal /> );
 
   return (
     <div className="header-container">
@@ -38,7 +21,7 @@ function Navigation({ isLoaded }){
           <NavLink exact to="/">MainPageLink</NavLink>
         </div>
         <div>
-          {isLoaded && sessionLinks}
+          {sessionLinks}
         </div>
       </nav>
     </div>
