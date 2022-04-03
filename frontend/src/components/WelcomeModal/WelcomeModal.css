@@ -1,1 +1,43 @@
-/*  */
+.errors-list{
+  color: rgb(116, 0, 0);
+}
+
+.signup-modal{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  /* margin: 10px; */
+  background-color: rgb(162, 235, 255);
+  width: 80vw;
+  min-height: 50vw;
+}
+
+.welcome-div{
+  margin: 20px;
+}
+
+.signup-form{
+  display: flex;
+  flex-flow: column;
+  align-items: left;
+  justify-content: left;
+  width: 70vw;
+  height: 70vw;
+}
+
+.form-input{
+  width: fit-content;
+}
+
+.labels-inputs{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.sec-qs{
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
