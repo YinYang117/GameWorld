@@ -1,10 +1,18 @@
 .header-container {
   display: flex;
   justify-content: space-between;
-  background-color: whitesmoke;
+  align-items: center;
+  padding: 0px 20px;
+  background-color: rgb(255, 247, 230);
+  min-height: 2.5rem;
 }
 
 .nav-container {
   display: flex;
+  justify-content: space-between;
+}
 
+.nav-item{
+  margin: 0px 5px;
+  border-radius: 10px;
 }

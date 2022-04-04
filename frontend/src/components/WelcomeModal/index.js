@@ -7,16 +7,15 @@ import "./WelcomeModal.css"
 function WelcomeModal() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
-  console.log(showLoginModal)
   return (
     <>
-      <button onClick={() => setShowLoginModal(true)}>Log In</button>
+      <button className="nav-item" onClick={() => setShowLoginModal(true)}>Log In</button>
       {showLoginModal && (
         <Modal onClose={() => setShowLoginModal(false)}>
           <LoginForm />
         </Modal>
       )}
-      <button onClick={() => setShowSignupModal(true)}>Sign up</button>
+      <button className="nav-item" onClick={() => setShowSignupModal(true)}>Sign up</button>
       {showSignupModal && (
         <Modal onClose={() => setShowSignupModal(false)}>
           <SignupForm />

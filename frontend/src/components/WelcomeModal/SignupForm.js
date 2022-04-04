@@ -10,8 +10,8 @@ function SignupForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [securityQuestion, setSecurityQuestion] = useState("");
-  const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState("");
+  // const [securityQuestion, setSecurityQuestion] = useState("");
+  // const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState("");
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
@@ -78,7 +78,7 @@ function SignupForm() {
             required
           />
         </div>
-        <div className="sec-qs">
+        {/* <div className="sec-qs">
           <label>Your Custom Security Question</label>
         </div>
         <div className="sec-qs">
@@ -101,7 +101,7 @@ function SignupForm() {
             onChange={(e) => setSecurityQuestionAnswer(e.target.value)}
             placeholder="CaSe SeNsiTive Answer"
           />
-        </div>
+        </div> */}
         <button type="submit">Sign Up</button>
         <ul className="errors-list">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}

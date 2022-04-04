@@ -17,8 +17,8 @@ function Navigation({ isLoaded }){
         <span>GW Logo</span>
       </div>
       <nav className="nav-container">
-        <div>
-          <NavLink exact to="/">MainPageLink</NavLink>
+        <div className='nav-item'>
+          <NavLink exact to="/">Home</NavLink>
         </div>
         <div>
           {sessionLinks}

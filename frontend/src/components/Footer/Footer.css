@@ -1,4 +1,11 @@
 .footer-container{
-  background-color: saddlebrown;
-  color: green;
+  background-color: rgb(91, 38, 0);
+  color: rgb(70, 153, 70);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
