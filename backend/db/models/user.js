@@ -8,19 +8,37 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3, 50],
-        isNotEmail(value) {
-          if (Validator.isEmail(value)) {
-            throw new Error('Cannot be an email.');
-          }
-        }
+        len: [3, 60],
+        isNotEmail(value) {if (Validator.isEmail(value)) throw new Error('Cannot be an email.')}
       }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [6, 256]
+        len: [6, 256],
+        isEmail: true
+      }
+    },
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 60]
+      }
+    },
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 100]
+      }
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [3, 30]
       }
     },
     hashedPassword: {
@@ -43,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         loginUser: {
           attributes: {}
+          // sets aside emtpy {} to fill in with our login credentials
         }
       }
     });
