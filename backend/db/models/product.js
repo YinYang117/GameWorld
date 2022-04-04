@@ -51,19 +51,14 @@ module.exports = (sequelize, DataTypes) => {
   Product.associate = function(models) {
     Product.belongsTo(models.User, { foreignKey: 'ownerId' })
     Product.hasMany(models.Discussion, { foreignKey: 'spotId', onDelete: 'cascade', hooks: true })
-    Product.hasMany(models.Tag, {
+    Product.belongsToMany(models.Tag, { // might be hasMany??
       through: 'ProductTag', // model (singular) of join table
       otherKey: 'tagId', // Key that points to the other entity
-      foreignKey: 'spotId', // Key that points to this entity
+      foreignKey: 'productId', // Key that points to this entity
       onDelete: 'cascade',
       hooks: true // The beforeDestroy and afterDestroy hooks will only be called on associations that have onDelete: 'CASCADE' and hooks: true
     })
   };
-
-  // Model.associate = function (models) {
-  //   Model.belongsTo(models.Answer, { foreignKey: "answerId" });
-  // };
-// ^ move this to ProductTag. this I believe allows me to query the joins table for this information
 
   return Product;
 };
