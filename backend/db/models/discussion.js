@@ -1,12 +1,28 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Discussion = sequelize.define('Discussion', {
-    ownerID: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
-    message: DataTypes.STRING
-  }, {});
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    message: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      notEmpty: true,
+    },
+  },
+  {
+
+  });
+  
   Discussion.associate = function(models) {
-    // associations can be defined here
+    Discussion.belongsTo(models.User, { foreignKey: 'userId'})
+    Discussion.belongsTo(models.Product, { foreignKey: 'productId'})
   };
+
   return Discussion;
 };
