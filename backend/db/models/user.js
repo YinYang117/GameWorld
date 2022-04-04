@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       defaultScope: {
         attributes: {
-          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+          exclude: ['hashedPassword', 'createdAt', 'updatedAt']
         }
       },
       scopes: {
@@ -67,15 +67,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
   // Scopes help protect sensitive user information that should not be exposed to other users, or sent to front end.
-  // login scope includes all fields, which should only be used when checking the login credentials of a user.
-
-  User.associate = function (models) {
-    // associations can be defined here
-  };
+  // login scope should only be used when checking the login credentials of a user.
 
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
-    const { id, username, email } = this; // context is the User instance
-    return { id, username, email };
+    const { id, username, email, firstname, lastname, title } = this; // context is the User instance
+    return { id, username, email, firstname, lastname, title };
   };
 
   User.prototype.validatePassword = function (password) { // returns bool 
@@ -101,14 +97,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  User.signup = async function ({ username, email, password }) { // takes obj arg
+  User.signup = async function ({ username, email, firstname, lastname, title, password }) { // takes obj arg
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
       email,
+      firstname,
+      lastname,
+      title,
       hashedPassword
     });
     return await User.scope('currentUser').findByPk(user.id);
+  };
+  
+  User.associate = function (models) {
+    User.hasMany(models.Product, { foreignKey: 'ownerId', onDelete: 'cascade', hooks: true })
+    User.hasMany(models.Discussion, { foreignKey: 'userId', onDelete: 'cascade', hooks: true })
   };
 
   return User;
