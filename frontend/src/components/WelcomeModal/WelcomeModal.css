@@ -2,7 +2,7 @@
   color: rgb(116, 0, 0);
 }
 
-.signup-modal{
+.welcome-modal{
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -10,20 +10,21 @@
   /* margin: 10px; */
   background-color: rgb(162, 235, 255);
   width: 80vw;
-  min-height: 50vw;
+  min-height: 50vh;
+  border: 2px solid rgb(0, 255, 251);
 }
 
 .welcome-div{
   margin: 20px;
 }
 
-.signup-form{
+.welcome-form{
   display: flex;
   flex-flow: column;
   align-items: left;
   justify-content: left;
   width: 70vw;
-  height: 70vw;
+  height: 70vh;
 }
 
 .form-input{
@@ -36,8 +37,8 @@
   margin: 5px;
 }
 
-.sec-qs{
+/* .sec-qs{
   display: flex;
   justify-content: center;
   margin: 5px;
-}
+} */

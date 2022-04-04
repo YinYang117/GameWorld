@@ -30,10 +30,10 @@ function SignupForm() {
   };
 
   return (
-    <div className="signup-modal" >
+    <div className="welcome-modal" >
       <h3 className="welcome-div" >Welcome new friend!</h3>
       <div className="welcome-div" >To the ultimate site for discovering new game worlds</div>
-      <form className="signup-form" onSubmit={handleSubmit}>
+      <form className="welcome-form" onSubmit={handleSubmit}>
         <div className="labels-inputs">
           <label>Email</label>
           <input

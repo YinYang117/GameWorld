@@ -23,34 +23,36 @@ function LoginForm() {
   }
 
   return (
-    <>
-      <h2>Welcome Back!</h2>
-      <div>Log in here so that you can dive deeper into your favorite Game World</div>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-          Username or Email
+    <div className="welcome-modal">
+      <h2 className="welcome-div" >Welcome Back!</h2>
+      <div className="welcome-div" >Log in here so that you can dive deeper into your favorite Game World</div>
+      <form className="welcome-form" onSubmit={handleSubmit}>
+        <div className="labels-inputs">  
+          <label> Username or Email </label>
           <input
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
+            placeholder="credential"
             required
           />
-        </label>
-        <label>
-          Password
+        </div>
+        <div className="labels-inputs">  
+          <label> Password </label>
           <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="password"
+              required
           />
-        </label>
+        </div>
+        <ul className="errors-list">
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
         <button type="submit">Log In</button>
       </form>
-    </>
+    </div>
   );
 }
 
