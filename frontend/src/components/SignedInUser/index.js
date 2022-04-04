@@ -6,8 +6,8 @@ const SignedInUser = () => {
 
   return (
   <div className="signed-in-container">
-    <div>Welcome {sessionUser.username}</div>
     <ProfileButton user={sessionUser} />
+    <div>Welcome {sessionUser.username}</div>
   </div>
   );
 };
