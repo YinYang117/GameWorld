@@ -1,8 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Tag = sequelize.define('Tag', {
-    tags: DataTypes.STRING
+    tags: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 30]
+      }
+    }
   }, {});
+
   Tag.associate = function(models) {
     Tag.belongsToMany(models.Product, { // might be hasMany??
       through: 'ProductTag', // model (singular) of join table
