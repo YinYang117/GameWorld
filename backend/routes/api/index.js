@@ -1,9 +1,15 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const productsRouter = require('./products.js');
+const discussionsRouter = require('./discussions.js');
+const tagsRouter = require('./tags.js');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/products', productsRouter);
+router.use('/discussions', discussionsRouter);
+router.use('/tags', tagsRouter);
 
 //////
 // Test routes

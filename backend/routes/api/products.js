@@ -66,3 +66,5 @@ router.delete('/:productId', asyncHandler(async (req, res) => {
   res.json({})
   // ^ do I need this on a delete? no return either...
 }));
+
+module.exports = router;
