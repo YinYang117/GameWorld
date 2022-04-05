@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
   ProductTag.associate = function(models) {
     ProductTag.belongsTo(models.Product,  { foreignKey: 'productId' })
+    ProductTag.belongsTo(models.Tag,  { foreignKey: 'tagId' })
     // I believe allows me to query the joins table for this information
   };
 

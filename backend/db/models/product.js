@@ -53,8 +53,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Product.associate = function(models) {
     Product.belongsTo(models.User, { foreignKey: 'ownerId' })
-    Product.hasMany(models.Discussion, { foreignKey: 'spotId', onDelete: 'cascade', hooks: true })
-    Product.hasManyToMany(models.Tag, { // might be belongs to??
+    Product.hasMany(models.Discussion, { foreignKey: 'productId', onDelete: 'cascade', hooks: true })
+    Product.hasMany(models.ProductTag, { foreignKey: 'productId', onDelete: 'cascade', hooks: true })
+    Product.belongsToMany(models.Tag, {
       through: 'ProductTag', // model (singular) of join table
       otherKey: 'tagId', // Key that points to the other entity
       foreignKey: 'productId', // Key that points to this entity

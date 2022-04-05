@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
-const {Tag} = require('../../db/models');
+const {Tag, ProductTag, Product } = require('../../db/models');
 
 const validateTags = [
   check('tagName')
@@ -22,12 +22,18 @@ router.get('/', asyncHandler(async (req, res) => {
   return res.json({ tags })
 }));
 
-// router.get('/product/:productId', asyncHandler(async (req, res) => {
-//   return await Tag.findAll({ where: { productId }})
-// }));
+router.get('/product/:productId', asyncHandler(async (req, res) => {
+  const productId = parseInt(req.params.productId, 10);
+  return await Tag.findAll({
+    include: [{model: ProductTag,
+      include: [Product]
+    } ]
+    
+    })
+}));
 // This will need to query through product tags table somehow
 
-router.post('/new', validateTag, asyncHandler(async (req, res) => {
+router.post('/new', validateTags, asyncHandler(async (req, res) => {
   const { tagName } = req.body;
   const tag = await Tag.create({ tagName });
   return res.json(tag);
