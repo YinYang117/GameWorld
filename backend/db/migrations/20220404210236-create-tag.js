@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tags: {
+      tagName: {
         type: Sequelize.STRING(30)
       },
       createdAt: {

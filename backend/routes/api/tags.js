@@ -6,7 +6,7 @@ const router = express.Router();
 const {Tag} = require('../../db/models');
 
 const validateTags = [
-  check('tags')
+  check('tagName')
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage("Please write a Message for your Tag post")
@@ -25,20 +25,20 @@ router.get('/', asyncHandler(async (req, res) => {
 // router.get('/product/:productId', asyncHandler(async (req, res) => {
 //   return await Tag.findAll({ where: { productId }})
 // }));
-// I think this will need to query through product tags table
+// This will need to query through product tags table somehow
 
 router.post('/new', validateTag, asyncHandler(async (req, res) => {
-  const { tags } = req.body;
-  const tag = await Tag.create({ tags });
+  const { tagName } = req.body;
+  const tag = await Tag.create({ tagName });
   return res.json(tag);
 }));
 
 // Put will only change the Message!!! On purpose
 router.put('/:tagId', asyncHandler(async (req, res) => {
-  const { message } = req.body;
+  const { tagName } = req.body;
   const tagId = parseInt(req.params.tagId, 10);
   const tag = await Tag.findByPk(tagId);
-  tag.update({ message })
+  tag.update({ tagName })
   
   res.json({})
 }));
