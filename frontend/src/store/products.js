@@ -41,7 +41,6 @@ export const loadProducts = () => async (dispatch) => {
 //   const res = await csrfFetch(`/api/products/${id}`)
 //   const data = await res.json();
 //   console.log('load single product in store', data)
-
 //   dispatch(setProduct(data))
 // }
 
@@ -72,3 +71,26 @@ export const deleteProduct = (id) => async (dispatch) => {
   await csrfFetch(`/api/products/${id}`, { method: 'DELETE' })
   dispatch(setProducts({}));
 }
+
+// end of thunks
+/////////////////////////////////////////
+// reducer
+
+const initState = {};
+
+const productsReducer = (state = initState, action) => {
+  // let newState = { ...state };
+  let newState = Object.assign({}, state);
+  switch (action.type) {
+    case LOAD_PRODUCTS:
+      newState.products = [...state.products, ...action.payload]
+      return newState;
+    case LOAD_PRODUCT:
+      newState.products[action.payload.id] = action.payload
+      return newState;
+    default:
+      return state;
+  }
+}
+
+export default productsReducer;
