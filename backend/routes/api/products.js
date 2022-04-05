@@ -40,9 +40,15 @@ router.get('/', asyncHandler(async (req, res) => {
   return res.json({ products })
 }));
 
-router.get('/owner/:ownerId', asyncHandler(async (req, res) => {
-  return await Product.findAll({ where: { ownerId }})
+router.get('/:productId', asyncHandler(async (req, res) => {
+  const productId = parseInt(req.params.productId, 10);
+  const product = await Product.findByPk(productId);
+  return res.json({ product })
 }));
+
+// router.get('/owner/:ownerId', asyncHandler(async (req, res) => {
+//   return await Product.findAll({ where: { ownerId }})
+// }));
 
 router.post('/new', validateProduct, asyncHandler(async (req, res) => {
   const { ownerId, productTitle, mainImage, mainImageAlt, description } = req.body;
