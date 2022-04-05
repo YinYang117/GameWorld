@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [4, 40]
       }
-
     },
     mainImage: {
       type: DataTypes.STRING,
@@ -40,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // Todo: see if i can get a min, with no max, on len for desc.
 
-  Product.newProduct = async function ({ world, location, description, price }) {
+  Product.newProduct = async function ({ ownerId, productTitle, mainImage, mainImageAlt, description }) {
     const newProduct = await Product.create({
       ownerId, productTitle, mainImage, mainImageAlt, description
     });
