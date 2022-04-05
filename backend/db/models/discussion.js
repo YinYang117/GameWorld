@@ -15,9 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       notEmpty: true,
     },
   },
-  {
-
-  });
+  {});
 
   Discussion.newDiscussion = async function ({ userId, productId, message }) {
     const newDiscussion = await Discussion.create({
@@ -26,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
 
     return await newDiscussion;
   };
-
 
   Discussion.associate = function(models) {
     Discussion.belongsTo(models.User, { foreignKey: 'userId'})

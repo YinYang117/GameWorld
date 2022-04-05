@@ -33,19 +33,23 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   },
-  {
-
-  });
+  {});
 
   // Todo: see if i can get a min, with no max, on len for desc.
+  
+  // Product.allProducts = async function () {
+  //   return await Product.findAll()
+  // }
 
-  Product.newProduct = async function ({ ownerId, productTitle, mainImage, mainImageAlt, description }) {
-    const newProduct = await Product.create({
-      ownerId, productTitle, mainImage, mainImageAlt, description
-    });
+  // Product.newProduct = async function ({ ownerId, productTitle, mainImage, mainImageAlt, description }) {
+  //   const newProduct = await Product.create({
+  //     ownerId, productTitle, mainImage, mainImageAlt, description
+  //   });
+  //   return await newProduct;
+  // };
 
-    return await newProduct;
-  };
+  // Do I even need any of ^ these to be in the model?
+  // I think I can do everything in the api routes by importing the model...
 
   Product.associate = function(models) {
     Product.belongsTo(models.User, { foreignKey: 'ownerId' })

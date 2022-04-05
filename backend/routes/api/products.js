@@ -36,21 +36,25 @@ const validateProduct = [
 ];
 
 router.get('/', asyncHandler(async (req, res) => {
-  const products = await Product.allProducts();
+  const products = await Product.findAll();
   return res.json({ products })
 }));
 
+router.get('/owner/:ownerId', asyncHandler(async (req, res) => {
+  return await Product.findAll({ where: { ownerId }})
+}));
+
 router.post('/new', validateProduct, asyncHandler(async (req, res) => {
-  const { userId, world, location, mainImage, mainImageAlt, description, price } = req.body;
-  const product = await Product.create({ userId, world, location,  mainImage, mainImageAlt, description, price });
+  const { ownerId, productTitle, mainImage, mainImageAlt, description } = req.body;
+  const product = await Product.create({ ownerId, productTitle, mainImage, mainImageAlt, description });
   return res.json(product);
 }));
 
 router.put('/:productId', asyncHandler(async (req, res) => {
-  const { world, location, mainImage, mainImageAlt, description, price } = req.body;
+  const { ownerId, productTitle, mainImage, mainImageAlt, description } = req.body;
   const productId = parseInt(req.params.productId, 10);
   const product = await Product.findByPk(productId);
-  product.update({ world, location, mainImage, mainImageAlt, description, price })
+  product.update({ ownerId, productTitle, mainImage, mainImageAlt, description })
   
   res.json({})
 }));
@@ -60,5 +64,5 @@ router.delete('/:productId', asyncHandler(async (req, res) => {
   const doomedProduct = await Product.findByPk(productId);
   await doomedProduct.destroy();
   res.json({})
-  // ^ do I need this on a delete?
+  // ^ do I need this on a delete? no return either...
 }));
