@@ -37,7 +37,6 @@ export const loadProducts = () => async (dispatch) => {
   const res = await csrfFetch('/api/products')
   const data = await res.json();
   const loadedProducts = {};
-
   data.forEach(product => loadedProducts[product.id] = product);
   dispatch(setProducts(loadedProducts))
 }
