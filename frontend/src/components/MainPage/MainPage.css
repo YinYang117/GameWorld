@@ -3,6 +3,6 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  /* height: 100vh; */
+  height: 100vh;
   padding-bottom: 2.5rem;
 }

@@ -1,18 +1,21 @@
 import React from "react";
+import { useHistory } from "react-router-dom"
 import "./ProductCard.css";
 
 function ProductCard({product}) {
   // if no main icon, use a default
-  let desc = product.description
-  if (desc.length > 100) desc = desc.slice(0,100).replace(/(\s)\S*$/, "") + "..."
+  const history = useHistory();
+  const handleClick = () => {
+    history.push(`/products/${product.id}`)
+  }
 
   return (
     <>
-      <div className="product-card-container" >
+      <div onClick={handleClick} className="product-card-container" >
         <img className="product-icon" src={product?.mainIcon} alt={product.mainImageAlt}/>
         <div className="product-title-description-container">
           <div className="product-title" >{product.productTitle}</div>
-          <div className="product-description" >{desc}</div>
+          <div className="product-description" >{product.description}</div>
         </div>
       </div>
     </>

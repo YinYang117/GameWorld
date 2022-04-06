@@ -4,7 +4,6 @@ import { useParams, useHistory } from "react-router-dom";
 import * as productActions from '../../store/products'
 import './ProductDetailsPage.css';
 
-
 function ProductDetailsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -34,7 +33,8 @@ function ProductDetailsPage() {
 
   const submitProductEdits = () => {
     const newProductData = product;
-    // ownerId exists, but I wont allow it to be edited
+    // I use this ^ because ownerId exists, but I wont allow it to be edited and still need it there
+    if (productTitle) newProductData.productTitle = productTitle
     if (mainIcon) newProductData.mainIcon = mainIcon
     if (mainImage) newProductData.mainImage = mainImage
     if (mainImageAlt) newProductData.mainImageAlt = mainImageAlt
