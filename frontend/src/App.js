@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
 import Footer from "./components/Footer";
+import ProductDetailsPage from "./components/ProductDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,7 +18,14 @@ function App() {
   return isLoaded && (
     <>
       <Header isLoaded={isLoaded} />
-      <MainPage />
+      <Switch>
+        <Route exact path="/" >
+          <MainPage />
+        </Route>
+        <Route path="/products/:productId">
+          <ProductDetailsPage />
+        </Route>
+      </Switch>
       <Footer />
     </>
   );

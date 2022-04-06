@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
         len: [4, 40]
       }
     },
+    mainIcon: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [4, 256]
+      }
+    },
     mainImage: {
       type: DataTypes.STRING,
       allowNull: false,

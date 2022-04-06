@@ -14,6 +14,9 @@ module.exports = {
       productTitle: {
         type: Sequelize.STRING(40)
       },
+      mainIcon: {
+        type: Sequelize.STRING(256)
+      },
       mainImage: {
         type: Sequelize.STRING(256)
       },

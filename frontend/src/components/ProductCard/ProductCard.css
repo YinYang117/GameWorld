@@ -1,8 +1,4 @@
 .product-card-container{
-  background: rgb(15,199,118);
-  background: radial-gradient(ellipse, rgba(195, 252, 255, 0.56) 0%, rgba(0, 162, 195, 0.567) 20%, rgba(9, 9, 121, 0) 50%);
-  color: brown;
-
   width: 80vw;
   min-height: 100px;
   border-radius: 10px;
@@ -13,8 +9,9 @@
 }
 
 .product-card-container:hover{
-
-
+  background: rgb(15,199,118);
+  background: radial-gradient(ellipse, rgba(195, 252, 255, 0.56) 0%, rgba(0, 162, 195, 0.567) 20%, rgba(9, 9, 121, 0) 50%);
+  color: brown;
   width: 80vw;
   min-height: 100px;
   border-radius: 10px;
@@ -22,4 +19,9 @@
 
   display: flex;
   align-items: center;
+}
+
+.product-icon{
+  max-width: 200px;
+  max-height: 200px;
 }

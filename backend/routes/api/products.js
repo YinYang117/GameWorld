@@ -14,6 +14,12 @@ const validateProduct = [
     .withMessage("Your Product's Title must have at least 4 characters")
     .isLength({ max: 40 })
     .withMessage("Your Product's Title can not be longer then 40 characters"),
+  check('mainIcon')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 4 })
+    .withMessage('MainIcon has a minimum of 4 characters')
+    .isLength({ max: 256 })
+    .withMessage('MainIcon has a 256 character limit'),  
   check('mainImage')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
