@@ -7,21 +7,27 @@ import "./MainPage.css";
 function MainPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const products = useSelector(state => state.)
+  const products = useSelector(state => Object.values(state.products))
 
   useEffect(() => {
     dispatch(productActions.loadProducts())
   },[dispatch])
 
   return (
-    <div className="main">
-      <div>Main Page</div>
-      <div>Game World</div>
-      <div className="product-list-container">
-
+    <>
+      <div className="main">
+        <div>Main Page</div>
+        <div>Game World</div>
+        <div className="product-list-container">
+          {products &&
+            products.map(product => 
+              <ProductCard key={product.id} product={product} />
+            )
+          }
+        </div>
       </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
 export default MainPage

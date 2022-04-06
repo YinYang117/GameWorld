@@ -1,7 +1,8 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_PRODUCTS = 'products/loadProducts';
-const LOAD_PRODUCT = 'products/loadProduct';
+const ADD_PRODUCT = 'products/loadProduct';
+const DELETE_PRODUCT = 'products/deleteProduct';
 
 // CONSTANTS display text in actions log
 /////////////////////////////////////////
@@ -14,10 +15,17 @@ const setProducts = (products) => {
   };
 };
 
-const setProduct = (product) => {
+const addProduct = (product) => {
   return {
-    type: LOAD_PRODUCT,
+    type: ADD_PRODUCT,
     payload: product,
+  };
+}; 
+
+const removeProduct = (id) => {
+  return { 
+    type: DELETE_PRODUCT,
+    payload: id,
   };
 }; 
 
@@ -33,7 +41,7 @@ export const loadProducts = () => async (dispatch) => {
   const data = await res.json();
   const loadedProducts = {};
 
-  data.products.forEach(product => loadedProducts[product.id] = product);
+  data.forEach(product => loadedProducts[product.id] = product);
   dispatch(setProducts(loadedProducts))
 }
 
@@ -52,7 +60,7 @@ export const newProduct = (newProduct) => async (dispatch) => {
   })
   const data = await res.json();
   console.log('new product in store', data)
-  dispatch(setProduct(data))
+  dispatch(addProduct(data))
 }
 
 // Dont allow custom ownerId, aka dont let owner change ownership
@@ -64,12 +72,12 @@ export const editProduct = (editedProduct) => async (dispatch) => {
     })
   const data = await res.json();
   console.log('data from editproduct in store', data)
-  dispatch(setProduct(data))
+  dispatch(addProduct(data))
 }
 
 export const deleteProduct = (id) => async (dispatch) => {
   await csrfFetch(`/api/products/${id}`, { method: 'DELETE' })
-  dispatch(setProducts({}));
+  dispatch(removeProduct(id));
 }
 
 // end of thunks
@@ -83,11 +91,15 @@ const productsReducer = (state = initState, action) => {
   let newState = Object.assign({}, state);
   switch (action.type) {
     case LOAD_PRODUCTS:
-      newState.products = [...state.products, ...action.payload]
+      newState = action.payload
       return newState;
-    case LOAD_PRODUCT:
-      newState.products[action.payload.id] = action.payload
+    case ADD_PRODUCT:
+      newState[action.payload.id] = action.payload
       return newState;
+    case DELETE_PRODUCT:
+      delete newState[action.payload]
+      return newState
+      // return newState.products.fiter(product => product.id !== action.payload)
     default:
       return state;
   }

@@ -37,7 +37,7 @@ const validateProduct = [
 
 router.get('/', asyncHandler(async (req, res) => {
   const products = await Product.findAll();
-  return res.json({ products })
+  return res.json(products)
 }));
 
 router.get('/:productId', asyncHandler(async (req, res) => {
