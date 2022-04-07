@@ -18,7 +18,7 @@ function Navigation({ isLoaded }){
       </div>
       <nav className="nav-container">
         <div className='nav-item'>
-          <NavLink exact to="/">Home</NavLink>
+          <NavLink to="/">Home</NavLink>
         </div>
         <div>
           {sessionLinks}

@@ -57,18 +57,18 @@ router.get('/:productId', asyncHandler(async (req, res) => {
 // }));
 
 router.post('/new', validateProduct, asyncHandler(async (req, res) => {
-  const { ownerId, productTitle, mainImage, mainImageAlt, description } = req.body;
-  const product = await Product.create({ ownerId, productTitle, mainImage, mainImageAlt, description });
+  const { ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description } = req.body;
+  const product = await Product.create({ ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description });
   return res.json(product);
 }));
 
-router.put('/:productId', asyncHandler(async (req, res) => {
-  const { ownerId, productTitle, mainImage, mainImageAlt, description } = req.body;
+router.put('/:productId', validateProduct, asyncHandler(async (req, res) => {
+  const { ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description } = req.body;
   const productId = parseInt(req.params.productId, 10);
   const product = await Product.findByPk(productId);
-  product.update({ ownerId, productTitle, mainImage, mainImageAlt, description })
-  
-  res.json({})
+  product.update({ ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description })
+
+  return res.json(product)
 }));
 
 router.delete('/:productId', asyncHandler(async (req, res) => {

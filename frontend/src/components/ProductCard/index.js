@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom"
 import "./ProductCard.css";
 
@@ -8,6 +8,11 @@ function ProductCard({product}) {
   const handleClick = () => {
     history.push(`/products/${product.id}`)
   }
+  const [shortDesc, setShortDesc] = useState('');
+
+  if (product.description > 100) {
+    setShortDesc(product.description.slice(0,100).replace(/(\s)\S*$/, "").concat('...'))
+  }
 
   return (
     <>
@@ -15,7 +20,7 @@ function ProductCard({product}) {
         <img className="product-icon" src={product?.mainIcon} alt={product.mainImageAlt}/>
         <div className="product-title-description-container">
           <div className="product-title" >{product.productTitle}</div>
-          <div className="product-description" >{product.description}</div>
+          <div className="product-description" >{shortDesc}</div>
         </div>
       </div>
     </>

@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import MainPage from "./components/MainPage";
 import Footer from "./components/Footer";
 import ProductDetailsPage from "./components/ProductDetailsPage";
+import NewProductPage from "./components/NewProductPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,8 +23,14 @@ function App() {
         <Route exact path="/" >
           <MainPage />
         </Route>
+        <Route exact path="/products/new">
+          <NewProductPage />
+        </Route>
         <Route path="/products/:productId">
           <ProductDetailsPage />
+        </Route>
+        <Route>
+          404 Not Found
         </Route>
       </Switch>
       <Footer />
