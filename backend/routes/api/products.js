@@ -47,8 +47,8 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 router.get('/:productId', asyncHandler(async (req, res) => {
-  const productId = parseInt(req.params.productId, 10);
-  const product = await Product.findByPk(productId);
+  // const productId = parseInt(req.params.productId, 10);
+  const product = await Product.findByPk(req.params.productId);
   return res.json({ product })
 }));
 

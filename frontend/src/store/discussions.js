@@ -1,93 +1,58 @@
-// import { csrfFetch } from './csrf';
+import { csrfFetch } from './csrf';
 
-// const LOAD_PRODUCTS = 'products/loadProducts';
-// const LOAD_PRODUCT = 'products/loadProduct';
+const LOAD_DISCUSSIONS = 'discussions/load_discussions';
+const LOAD_DISCUSSION = 'discussions/load_discussion';
+const DELETE_DISCUSSION = 'discussions/delete_discussion';
 
 // // CONSTANTS display text in actions log
 // /////////////////////////////////////////
 // // action creators
 
-// const setProducts = (products) => {
-//   return {
-//     type: LOAD_PRODUCTS,
-//     payload: products,
-//   };
-// };
+const setDiscussions = (discussions) => {
+  return {
+    type: LOAD_DISCUSSIONS,
+    payload: discussions,
+  }
+}
 
-// const setProduct = (product) => {
-//   return {
-//     type: LOAD_PRODUCT,
-//     payload: product,
-//   };
-// }; 
+const addDiscussion = (discussion) => {
+  return {
+    type: LOAD_DISCUSSIONS,
+    payload: discussion,
+  }
+}
+
+const removeDiscussion = (id) => {
+  return { 
+    type: DELETE_DISCUSSION,
+    payload: id,
+  };
+}; 
+
+// !#!#!#!#!#!#!
+// Im going to normalize data in these Discussions in the cases below
+// compared to products
+
+export const loadAllDiscussions = () => async (dispatch) => {
+  const res = await csrfFetch('/api/discussions')
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(setDiscussions(data))
+  }
+}
 
 
-// // products
-// // Products
-// // PRODUCTs
-// /////////////////////////////////////////
-// // thunks return a function that returns an action
-
-// export const loadProducts = () => async (dispatch) => {
-//   const res = await csrfFetch('/api/products')
-//   const data = await res.json();
-//   const loadedProducts = {};
-
-//   data.products.forEach(product => loadedProducts[product.id] = product);
-//   dispatch(setProducts(loadedProducts))
-// }
-
-// // export const loadProduct = (id) => async (dispatch) => {
-// //   const res = await csrfFetch(`/api/products/${id}`)
-// //   const data = await res.json();
-// //   console.log('load single product in store', data)
-// //   dispatch(setProduct(data))
-// // }
-
-// export const newProduct = (newProduct) => async (dispatch) => {
-//   const { ownerId, productTitle, mainImage, mainImageAlt, description } = newProduct
-//   const res = await csrfFetch('/api/products/new', {
-//       method: 'POST',
-//       body: JSON.stringify({ ownerId, productTitle, mainImage, mainImageAlt, description }),
-//   })
-//   const data = await res.json();
-//   console.log('new product in store', data)
-//   dispatch(setProduct(data))
-// }
-
-// // Dont allow custom ownerId, aka dont let owner change ownership
-// export const editProduct = (editedProduct) => async (dispatch) => {
-//   const { ownerId, productTitle, mainImage, mainImageAlt, description } = editedProduct
-//   const res = await csrfFetch(`/api/products/${editedProduct.id}`, {
-//       method: 'PUT',
-//       body: JSON.stringify({ ownerId, productTitle, mainImage, mainImageAlt, description }),
-//     })
-//   const data = await res.json();
-//   console.log('data from editproduct in store', data)
-//   dispatch(setProduct(data))
-// }
-
-// export const deleteProduct = (id) => async (dispatch) => {
-//   await csrfFetch(`/api/products/${id}`, { method: 'DELETE' })
-//   dispatch(setProducts({}));
-// }
-
-// // end of thunks
-// /////////////////////////////////////////
-// // reducer
-
+// normalize data here for these, vs the products page.
 const initState = {};
-
 const discussionsReducer = (state = initState, action) => {
   //// let newState = { ...state };
   // let newState = Object.assign({}, state);
   switch (action.type) {
-    // case LOAD_PRODUCTS:
-    //   newState.products = [...state.products, ...action.payload]
-    //   return newState;
-    // case LOAD_PRODUCT:
-    //   newState.products[action.payload.id] = action.payload
-    //   return newState;
+    case LOAD_DISCUSSIONS:
+      const objDiscussions = {};
+      action.payload.forEach(dis => objDiscussions[dis.id] = dis);
+      return {...state, ...objDiscussions}
     default:
       return state;
   }

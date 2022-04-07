@@ -44,12 +44,15 @@ export const loadProducts = () => async (dispatch) => {
   }
 }
 
-// export const loadProduct = (id) => async (dispatch) => {
-//   const res = await csrfFetch(`/api/products/${id}`)
-//   const data = await res.json();
-//   console.log('load single product in store', data)
-//   dispatch(setProduct(data))
-// }
+export const loadProduct = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/products/${id}`)
+
+  if (res.ok) {
+    const data = await res.json();
+    // console.log('load single product in store', data)
+    dispatch(addProduct(data))
+  }
+}
 
 export const newProduct = (newProduct) => async (dispatch) => {
   console.log('new', newProduct)

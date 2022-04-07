@@ -11,9 +11,12 @@ function ProductDetailsPage() {
   let id = parseInt(productId);
   const sessionUser = useSelector(state => state.session.user);
   const product = useSelector(state => {
-    if (Object.keys(state.products).length === 0) dispatch(productActions.loadProducts())
+    if (!state.products[id]) dispatch(productActions.loadProduct(id))
     return state.products[id]
+    // call for 1 product if not in state
+    // this return isnt the best. if the product still doesnt exist after dispatch...
   });
+
   // let ownerData = useSelector(state => state.products[id].ownerId);
   const [productTitle, setProductTitle] = useState(product?.productTitle)
   const [mainIcon, setMainIcon] = useState(product?.mainIcon);
@@ -24,14 +27,11 @@ function ProductDetailsPage() {
   const [isOwner, setIsOwner] = useState(false);
 
   // useEffect(() => {
-  //   dispatch(productActions.loadProducts())
+  //   dispatch(productActions.loadProduct(id))
   // }, [dispatch])
 
   useEffect(() => {
     setIsOwner(sessionUser?.id === product?.ownerId)
-    // console.log('product', product?.ownerId)
-    // console.log('sessionUser', sessionUser?.id)
-    // console.log('user is owner:', isOwner)
   }, [sessionUser, product, isOwner]) 
 
   const submitProductEdits = () => {
@@ -76,7 +76,6 @@ function ProductDetailsPage() {
         e.preventDefault();
         submitProductEdits();
         }}>
-        
         <input onChange={e => setProductTitle(e.target.value)} type="text" className="product-product-title" placeholder={product?.productTitle} value={productTitle} />
         <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-mainIcon" placeholder={product?.mainIcon} value={mainIcon} />
         <input onChange={e => setMainImage(e.target.value)} type="text" className="product-mainImage" placeholder={product?.mainImage} value={mainImage} />

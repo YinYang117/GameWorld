@@ -9,7 +9,9 @@ const validateDiscussion = [
   check('message')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Please write a Message for your Discussion post"),
+    .withMessage("Please write a Message for your Discussion post")
+    .isLength({ min: 40 })
+    .withMessage("Please provide a discussion at least 40 characters long"),
   handleValidationErrors
 ];
 
@@ -19,7 +21,11 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 router.get('/user/:userId', asyncHandler(async (req, res) => {
-  return await Discussion.findAll({ where: { userId }})
+  return await Discussion.findAll({ where: { userId: req.params.userId }})
+}));
+
+router.get('/product/:productId', asyncHandler(async (req, res) => {
+  return await Discussion.findAll({ where: { productId: req.params.productId }})
 }));
 
 router.post('/new', validateDiscussion, asyncHandler(async (req, res) => {
@@ -28,7 +34,7 @@ router.post('/new', validateDiscussion, asyncHandler(async (req, res) => {
   return res.json(discussion);
 }));
 
-// Put will only change the Message!!! On purpose
+// Put will only change the Message! On purpose
 router.put('/:discussionId', asyncHandler(async (req, res) => {
   const { message } = req.body;
   const discussionId = parseInt(req.params.discussionId, 10);
@@ -39,11 +45,18 @@ router.put('/:discussionId', asyncHandler(async (req, res) => {
 }));
 
 router.delete('/:discussionId', asyncHandler(async (req, res) => {
-  const discussionId = parseInt(req.params.discussionId, 10);
-  const doomedDiscussion = await Discussion.findByPk(discussionId);
+  const doomedDiscussion = await Discussion.findByPk(req.params.discussionId);
+  // ^ saves 1 line of code if it works
   await doomedDiscussion.destroy();
   res.json({})
-  // ^ do I need this on a delete? no return either...
 }));
+
+// router.delete('/:discussionId', asyncHandler(async (req, res) => {
+//   const discussionId = parseInt(req.params.discussionId, 10);
+//   const doomedDiscussion = await Discussion.findByPk(discussionId);
+//   await doomedDiscussion.destroy();
+//   res.json({})
+//   // ^ do I need this on a delete? no return either...
+// }));
 
 module.exports = router;

@@ -24,7 +24,7 @@ const validateSignup = [
     .isLength({ min: 6 })
     .withMessage('Please provide an email with at least 6 characters.')
     .isLength({ max: 60 })
-    .withMessage('Please provide an email no longer than 256 characters.'),,
+    .withMessage('Please provide an email no longer than 256 characters.'),
   check('firstname')
     .exists({ checkFalsy: true })
     .isLength({ min: 2 })
@@ -51,12 +51,11 @@ const validateSignup = [
 
 // Sign up
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
-  const { username, email, firstname, lastname, title, password, } = req.body;
-  const user = await User.signup({ username, email, firstname, lastname, title, password, });
+  const { username, email, firstname, lastname, title, password } = req.body;
+  const user = await User.signup({ username, email, firstname, lastname, title, password });
 
   await setTokenCookie(res, user);
   return res.json({ user });
-})
-);
+}));
 
 module.exports = router;
