@@ -8,6 +8,8 @@ function SignupForm() {
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   // const [securityQuestion, setSecurityQuestion] = useState("");
@@ -20,13 +22,14 @@ function SignupForm() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
+      
+      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    return setErrors(['Above all, Confirm Password field must match Password field']);
   };
 
   return (
@@ -57,6 +60,28 @@ function SignupForm() {
           />
         </div>
         <div className="labels-inputs">
+          <label>First Name</label>
+          <input
+            className="form-input"
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+              required
+          />
+        </div>
+        <div className="labels-inputs">
+          <label>Last Name</label>
+          <input
+            className="form-input"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
+              required
+          />
+        </div>
+        <div className="labels-inputs">
           <label>Password</label>
           <input
           className="form-input"
@@ -78,6 +103,50 @@ function SignupForm() {
             required
           />
         </div>
+        <div className="d-flex">
+          <button className="signup-button" type="submit" disabled={errors.length > 0} >Sign Up</button>
+        </div>
+          {/* <button className="cancel-button" onClick={() => (false)}>Cancel</button> */}
+        <ul className="errors-list">
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+      </form>
+    </div>
+  );
+}
+
+export default SignupForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         {/* <div className="sec-qs">
           <label>Your Custom Security Question</label>
         </div>
@@ -102,13 +171,3 @@ function SignupForm() {
             placeholder="CaSe SeNsiTive Answer"
           />
         </div> */}
-        <button type="submit">Sign Up</button>
-        <ul className="errors-list">
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-      </form>
-    </div>
-  );
-}
-
-export default SignupForm;
