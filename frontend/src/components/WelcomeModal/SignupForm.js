@@ -16,35 +16,35 @@ function SignupForm() {
   // const [securityQuestion, setSecurityQuestion] = useState("");
   // const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState("");
   const [errors, setErrors] = useState([]);
-  const [preSubErrState, setpreSubErrState] = useState({});
-  const preSubErr = {};
+  // const [preSubErrState, setpreSubErrState] = useState({});
+  // const preSubErr = {};
 
-  useEffect(()=> {
-    if (username.length >= 3 && username.length <= 60) delete preSubErr['username']
-    else if (username.length < 3) preSubErr['username'] = "Username is too short"
-    else if (username.length > 60) preSubErr['username'] = "Username is too long"
-    if (email.length >= 6 && email.length <= 256) delete preSubErr['email']
-    else if (email.length < 3) preSubErr['email'] = "Email is too short"
-    else if (email.length > 60) preSubErr['email'] = "Email is too long"
-    if (firstName.length >= 2 && firstName.length <= 60) delete preSubErr['firstName']
-    else if (firstName.length < 2) preSubErr['firstName'] = "First name is too short"
-    else if (firstName.length > 60) preSubErr['firstName'] = "First name is too long"
-    if (lastName.length >= 2 && lastName.length <= 100) delete preSubErr['lastName']
-    else if (lastName.length < 2) preSubErr['lastName'] = "Last name is too short"
-    else if (lastName.length > 100) preSubErr['lastName'] = "Last name is too long"
-    if (title.length === 0) delete preSubErr['lastName']
-    else if (title.length >= 3 && title.length <= 30) delete preSubErr['lastName']
-    else if (lastName.length < 3) preSubErr['lastName'] = "Last name is too short"
-    else if (lastName.length > 60) preSubErr['lastName'] = "Last name is too long"
-    if (password !== confirmPassword) preSubErr['password'] = "Password field must match Confirmed Password"
-    if (password !== confirmPassword) delete preSubErr['password']
-    console.log("pre error signup w/ object.values", Object.values(preSubErr))
-    console.log(Object.keys(preSubErr).length > 0)
-  },[email,username,firstName,lastName,title,password,confirmPassword])
+  // useEffect(()=> {
+  //   if (username.length >= 3 && username.length <= 60) delete preSubErr['username']
+  //   else if (username.length < 3) preSubErr['username'] = "Username is too short"
+  //   else if (username.length > 60) preSubErr['username'] = "Username is too long"
+  //   if (email.length >= 6 && email.length <= 256) delete preSubErr['email']
+  //   else if (email.length < 3) preSubErr['email'] = "Email is too short"
+  //   else if (email.length > 60) preSubErr['email'] = "Email is too long"
+  //   if (firstName.length >= 2 && firstName.length <= 60) delete preSubErr['firstName']
+  //   else if (firstName.length < 2) preSubErr['firstName'] = "First name is too short"
+  //   else if (firstName.length > 60) preSubErr['firstName'] = "First name is too long"
+  //   if (lastName.length >= 2 && lastName.length <= 100) delete preSubErr['lastName']
+  //   else if (lastName.length < 2) preSubErr['lastName'] = "Last name is too short"
+  //   else if (lastName.length > 100) preSubErr['lastName'] = "Last name is too long"
+  //   if (title.length === 0) delete preSubErr['lastName']
+  //   else if (title.length >= 3 && title.length <= 30) delete preSubErr['lastName']
+  //   else if (lastName.length < 3) preSubErr['lastName'] = "Last name is too short"
+  //   else if (lastName.length > 60) preSubErr['lastName'] = "Last name is too long"
+  //   if (password !== confirmPassword) preSubErr['password'] = "Password field must match Confirmed Password"
+  //   if (password !== confirmPassword) delete preSubErr['password']
+  //   console.log("pre error signup w/ object.values", Object.values(preSubErr))
+  //   console.log(Object.keys(preSubErr).length > 0)
+  // },[email,username,firstName,lastName,title,password,confirmPassword])
 
-  useEffect(() => {
-    setpreSubErrState(preSubErr)
-  },[preSubErr])
+  // useEffect(() => {
+  //   setpreSubErrState(preSubErr)
+  // },[preSubErr])
 
   if (sessionUser) return <Redirect to="/" />;
   
@@ -145,12 +145,12 @@ function SignupForm() {
         </div>
         <p>hi</p>
         <div className="d-flex">
-          <button className="signup-button" type="submit" disabled={Object.keys(preSubErr).length > 0} >Sign Up</button>
+          <button className="signup-button" type="submit">Sign Up</button>
+          {/* ^ disabled={Object.keys(preSubErr).length > 0} */}
         </div>
-        
           {/* <button className="cancel-button" onClick={() => (false)}>Cancel</button> */}
         <ul className="errors-list">
-          {preSubErrState.length && Object.values(preSubErr).map((preError, idx) => <li key={idx}>{preError}</li>)}
+          {/* {preSubErrState.length && Object.values(preSubErr).map((preError, idx) => <li key={idx}>{preError}</li>)} */}
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
       </form>
