@@ -37,11 +37,6 @@ const validateSignup = [
     .withMessage('Please provide a last name at least 2 characters long.')
     .isLength({ max: 100 })
     .withMessage('Please provide a last name no longer than 100 characters.'),
-  check('lastname')
-    .isLength({ min: 2 })
-    .withMessage('Please provide a last name at least 2 characters long.')
-    .isLength({ max: 100 })
-    .withMessage('Please provide a last name no longer than 100 characters.'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
@@ -51,6 +46,7 @@ const validateSignup = [
 
 // Sign up
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
+  if (req.body.title === undefined) req.body.title = 'n/a'
   const { username, email, firstname, lastname, title, password } = req.body;
   const user = await User.signup({ username, email, firstname, lastname, title, password });
 

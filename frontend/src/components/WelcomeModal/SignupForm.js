@@ -10,16 +10,14 @@ function SignupForm() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [title, setTitle] = useState("n/a");
+  const [title, setTitle] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [securityQuestion, setSecurityQuestion] = useState("");
-  // const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState("");
   const [errors, setErrors] = useState([]);
   // const [preSubErrState, setpreSubErrState] = useState({});
-  // const preSubErr = {};
-
+  
   // useEffect(()=> {
+  //   const preSubErr = {};
   //   if (username.length >= 3 && username.length <= 60) delete preSubErr['username']
   //   else if (username.length < 3) preSubErr['username'] = "Username is too short"
   //   else if (username.length > 60) preSubErr['username'] = "Username is too long"
@@ -38,6 +36,7 @@ function SignupForm() {
   //   else if (lastName.length > 60) preSubErr['lastName'] = "Last name is too long"
   //   if (password !== confirmPassword) preSubErr['password'] = "Password field must match Confirmed Password"
   //   if (password !== confirmPassword) delete preSubErr['password']
+  //   setpreSubErrState(preSubErr)
 
   // },[email,username,firstName,lastName,title,password,confirmPassword])
 
@@ -149,14 +148,13 @@ function SignupForm() {
             required
           />
         </div>
-        <p>hi</p>
         <div className="d-flex">
           <button className="signup-button" type="submit">Sign Up</button>
           {/* ^ disabled={Object.keys(preSubErr).length > 0} */}
         </div>
           {/* <button className="cancel-button" onClick={() => (false)}>Cancel</button> */}
         <ul className="errors-list">
-          {/* {preSubErrState.length && Object.values(preSubErr).map((preError, idx) => <li key={idx}>{preError}</li>)} */}
+          {/* {preSubErrState.length > 0 && Object.values(preSubErrState).map((preError, idx) => <li key={idx}>{preError}</li>)} */}
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
       </form>
@@ -165,58 +163,3 @@ function SignupForm() {
 }
 
 export default SignupForm;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {/* <div className="sec-qs">
-          <label>Your Custom Security Question</label>
-        </div>
-        <div className="sec-qs">
-        <input
-          className="form-input"
-            type="security-question"
-            value={securityQuestion}
-            onChange={(e) => setSecurityQuestion(e.target.value)}
-            placeholder="Fav Color / High School"
-          />
-        </div>
-        <div className="sec-qs">
-          <label>Security Question Answer</label>
-        </div>
-        <div className="sec-qs">
-        <input
-          className="form-input"
-            type="security-question-answer"
-            value={securityQuestionAnswer}
-            onChange={(e) => setSecurityQuestionAnswer(e.target.value)}
-            placeholder="CaSe SeNsiTive Answer"
-          />
-        </div> */}

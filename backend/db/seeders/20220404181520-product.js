@@ -15,7 +15,7 @@ module.exports = {
           ownerId: '2',
           productTitle: 'The Grid Game',
           mainIcon: "https://cf.geekdo-images.com/2CtvMwMTFsWgnTl2X8CsoA__opengraph_letterbox/img/2wGl5Ux0rd3igBzuSW4CRHaLKfc=/fit-in/1200x630/filters:fill(auto):strip_icc()/pic3287104.jpg",
-          mainImage: "http://homeli.co.uk/wp-content/uploads/2014/12/Playing-Dominoes-with-The-Grid-Game-Wooden-Hexagons-by-Victor-Aleman.jpg",
+          mainImage: "https://inspgr.id/app/uploads/2017/03/product-the-grid-game-feature.jpg",
           mainImageAlt: "The Grid Game in action",
           description: "Victor Alemán designed The Grid Game to try and revive the (almost) lost art of table-top pastimes. The game Alemán has conceived is dubbed Mexican Domino, working on a similar premise to regular dominoes but with each piece having 3 sides. These stunning dominoes are handcrafted from different segments of wood and form a visually pleasing array when laid out.",
         },
