@@ -32,7 +32,7 @@ function ProductDetailsPage() {
 
   useEffect(() => {
    setIsOwner(sessionUser?.id === ownerId)
-  }, [product, ownerId]) 
+  }, [product, ownerId, sessionUser]) 
 
 
   const submitProductEdits = () => {

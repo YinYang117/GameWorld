@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom"
 import * as discussionActions from '../../store/discussions';
 import "./DiscussionCard.css";
 
 function DiscussionCard({discussion}) {
   const sessionUser = useSelector(state => state.session.user);
-  // const discussionBackup = useSelector(state => state.discussions.id???)
   const [isOwner, setIsOwner] = useState('');
-  // const [discussion, setDiscussion] = useState(discussion)
   const [message, setMesssage] = useState('');
-  // const [message, setMesssage] = useState(discussion?.message);
-  const history = useHistory();
   const dispatch = useDispatch();
 
 
@@ -19,9 +14,9 @@ function DiscussionCard({discussion}) {
   // dispatch(discussionActions.loadProdDiscussions(id))
 
   useEffect(() => {
-    setIsOwner(sessionUser?.id === discussion?.userId)
-  }, [dispatch]) 
-// }, [sessionUser, discussion, isOwner]) 
+    if (sessionUser && discussion) setIsOwner(sessionUser.id === discussion.userId)
+    else setIsOwner(false)
+  }, [sessionUser]) 
 
   const submitDiscussionEdits = () => {
     const editedDiscMsg = discussion;
