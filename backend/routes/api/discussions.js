@@ -17,16 +17,16 @@ const validateDiscussion = [
 
 router.get('/', asyncHandler(async (req, res) => {
   const discussions = await Discussion.findAll();
-  console.log('discussions api', discussions)
-  return res.json({ discussions })
+  return res.json(discussions)
+}));
+
+router.get('/product/:productId', asyncHandler(async (req, res) => {
+  prodDiscussions = await Discussion.findAll({ where: { productId: req.params.productId }})
+  return res.json(prodDiscussions)
 }));
 
 router.get('/user/:userId', asyncHandler(async (req, res) => {
   return await Discussion.findAll({ where: { userId: req.params.userId }})
-}));
-
-router.get('/product/:productId', asyncHandler(async (req, res) => {
-  return await Discussion.findAll({ where: { productId: req.params.productId }})
 }));
 
 router.post('/new', validateDiscussion, asyncHandler(async (req, res) => {

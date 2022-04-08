@@ -26,7 +26,7 @@ function ProductDetailsPage() {
 
   useEffect(() => {
     dispatch(productActions.loadProduct(id))
-    dispatch(discussionActions.loadAllDiscussions())
+    dispatch(discussionActions.loadProdDiscussions(id))
   }, [dispatch]) 
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function ProductDetailsPage() {
         <button className="product-edit-submit" type='submit' >Submit Edits</button>
       </form>}
       <div className="discussion-list-container">
-          {allDiscussions.length > 0 &&
+          {Object.keys(allDiscussions).length > 0 &&
             Object.values(allDiscussions).map(discussion => 
               <DiscussionCard key={discussion.id} discussion={discussion} />
             )

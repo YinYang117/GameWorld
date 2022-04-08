@@ -49,7 +49,6 @@ export const loadProduct = (id) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    console.log('load single product in store', data)
     dispatch(addProduct(data))
   }
 }
@@ -71,7 +70,6 @@ export const newProduct = (newProduct) => async (dispatch) => {
 // Dont allow custom ownerId, aka dont let owner change ownership
 export const editProduct = (editedProduct) => async (dispatch) => {
   const { ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description } = editedProduct
-  console.log('wtf is id here',editedProduct.id)
   const res = await csrfFetch(`/api/products/${editedProduct.id}`, {
       method: 'PUT',
       body: JSON.stringify({ ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description }),
