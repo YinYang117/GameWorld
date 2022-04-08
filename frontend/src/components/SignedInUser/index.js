@@ -7,7 +7,7 @@ const SignedInUser = () => {
   return (
   <div className="signed-in-container">
     <ProfileButton user={sessionUser} />
-    <div>Welcome {sessionUser.username}</div>
+    <div>Welcome {sessionUser.firstname}</div>
   </div>
   );
 };
