@@ -8,13 +8,18 @@ function DiscussionCard({discussion}) {
   const sessionUser = useSelector(state => state.session.user);
   // const discussionBackup = useSelector(state => state.discussions.id???)
   const [isOwner, setIsOwner] = useState('');
-  const [message, setMesssage] = useState(discussion?.message);
+  // const [discussion, setDiscussion] = useState(discussion)
+  const [message, setMesssage] = useState('');
+  // const [message, setMesssage] = useState(discussion?.message);
   const history = useHistory();
   const dispatch = useDispatch();
 
+
+  // const allDiscussions = useSelector(state => state.discussions)
+  // dispatch(discussionActions.loadProdDiscussions(id))
+
   useEffect(() => {
     setIsOwner(sessionUser?.id === discussion?.userId)
-    console.log('user is owner:', isOwner)
   }, [dispatch]) 
 // }, [sessionUser, discussion, isOwner]) 
 
@@ -23,7 +28,12 @@ function DiscussionCard({discussion}) {
     editedDiscMsg.message = message
 
     dispatch(discussionActions.editDiscussionMsg(editedDiscMsg))
-    // setShowEditForm(!showEditForm)
+  }
+
+  const deleteDiscussionSubmit = () => {
+    const doomedId = discussion.id;
+    dispatch(discussionActions.deleteDiscussion(doomedId))
+
   }
 
   return (
@@ -38,12 +48,9 @@ function DiscussionCard({discussion}) {
             e.preventDefault();
             submitDiscussionEdits();
             }}>
-            <input onChange={e => setProductTitle(e.target.value)} type="text" className="product-product-title" placeholder={product?.productTitle} value={productTitle} />
-            <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-mainIcon" placeholder={product?.mainIcon} value={mainIcon} />
-            <input onChange={e => setMainImage(e.target.value)} type="text" className="product-mainImage" placeholder={product?.mainImage} value={mainImage} />
-            <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="product-mainImageAlt" placeholder={product?.mainImageAlt} value={mainImageAlt} />
-            <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder={product?.description} value={description} />
-            <button className="product-edit-submit" type='submit' >Submit Edits</button>
+            <input onChange={e => setMesssage(e.target.value)} type="text" className="discussion-message-edit-input" placeholder="New Discussion Message?" value={message} />
+            <button className="discussion-edit-submit" type='submit' >Submit Edits</button>
+            {isOwner && <button id="product-delete" onClick={deleteDiscussionSubmit} >Delete</button>}
           </form>
       }
       </div>

@@ -38,8 +38,7 @@ function SignupForm() {
   //   else if (lastName.length > 60) preSubErr['lastName'] = "Last name is too long"
   //   if (password !== confirmPassword) preSubErr['password'] = "Password field must match Confirmed Password"
   //   if (password !== confirmPassword) delete preSubErr['password']
-  //   console.log("pre error signup w/ object.values", Object.values(preSubErr))
-  //   console.log(Object.keys(preSubErr).length > 0)
+
   // },[email,username,firstName,lastName,title,password,confirmPassword])
 
   // useEffect(() => {

@@ -33,23 +33,32 @@ const removeDiscussion = (id) => {
 // Im going to normalize data in these Discussions in the cases below
 // compared to products
 
+export const newDiscussion = (newDiscussion) => async (dispatch) => {
+  const { userId, productId, message } = newDiscussion
+  const res = await csrfFetch('/api/discussions/new', {
+      method: 'POST',
+      body: JSON.stringify({ userId, productId, message }),
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addDiscussion(data))
+  }
+}
+
 export const loadAllDiscussions = () => async (dispatch) => {
   const res = await csrfFetch('/api/discussions')
 
   if (res.ok) {
     const data = await res.json();
-    // console.log('data!#!',data)
     dispatch(setDiscussions(data))
   }
 }
 
 export const loadProdDiscussions = (ProdId) => async (dispatch) => {
   const res = await csrfFetch(`/api/discussions/product/${ProdId}`)
-  console.log('res dis storE',res)
-
   if (res.ok) {
     const data = await res.json();
-    console.log('data dis storE',data)
     dispatch(setDiscussions(data))
   }
 }
@@ -64,6 +73,11 @@ export const editDiscussionMsg = (editedDiscMsg) => async (dispatch) => {
   dispatch(addDiscussion(data))
 }
 
+export const deleteDiscussion = (id) => async (dispatch) => {
+  await csrfFetch(`/api/discussions/${id}`, { method: 'DELETE' })
+  dispatch(removeDiscussion(id));
+}
+
 // normalize data here for these, vs the products page.
 const initState = {};
 const discussionsReducer = (state = initState, action) => {
@@ -72,7 +86,6 @@ const discussionsReducer = (state = initState, action) => {
   switch (action.type) {
     case LOAD_DISCUSSIONS:
       const objDiscussions = {};
-      console.log('action payload',action.payload)
       action.payload.forEach(dis => objDiscussions[dis.id] = dis);
       return {...state, ...objDiscussions}
     default:

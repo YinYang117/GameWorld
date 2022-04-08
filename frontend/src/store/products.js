@@ -54,7 +54,6 @@ export const loadProduct = (id) => async (dispatch) => {
 }
 
 export const newProduct = (newProduct) => async (dispatch) => {
-  console.log('new', newProduct)
   const { ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description } = newProduct
   const res = await csrfFetch('/api/products/new', {
       method: 'POST',

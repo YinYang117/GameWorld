@@ -23,6 +23,7 @@ function ProductDetailsPage() {
   const [description, setDescription] = useState(product?.description);
   const [showEditForm, setShowEditForm] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
+  const [newDiscussionMessage, setNewDiscussionMessage] = useState('')
 
   useEffect(() => {
     dispatch(productActions.loadProduct(id))
@@ -31,7 +32,6 @@ function ProductDetailsPage() {
 
   useEffect(() => {
    setIsOwner(sessionUser?.id === ownerId)
-  //  console.log( 'owner in prod deets',isOwner)
   }, [product, ownerId]) 
 
 
@@ -51,6 +51,15 @@ function ProductDetailsPage() {
   const deleteProductSubmit = () => {
     dispatch(productActions.deleteProduct(id))
     .then(history.push('/')) // Go home after delete
+  }
+
+  const submitNewDiscussion = () => {
+    const newDiscussion = {};
+    newDiscussion.userId = sessionUser.id
+    newDiscussion.productId = productId
+    newDiscussion.message = newDiscussionMessage
+
+    dispatch(discussionActions.newDiscussion(newDiscussion))
   }
 
   return (
@@ -90,7 +99,19 @@ function ProductDetailsPage() {
               <DiscussionCard key={discussion.id} discussion={discussion} />
             )
           }
-        </div>
+      </div>
+      <div className="new-discussion-starter">
+        Discuss this product!
+      </div>
+      {sessionUser &&
+      <form 
+        onSubmit={e => {
+        e.preventDefault();
+        submitNewDiscussion();
+        }}>
+        <input className="new-discussion-message" onChange={e => setNewDiscussionMessage(e.target.value)} type="text" placeholder="Share your opinion!" value={newDiscussionMessage} />
+        <button className="new-discussion-submit" type='submit' >Submit New Discussion</button>
+      </form>}
     </>
   );
 }
