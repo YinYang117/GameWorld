@@ -10,7 +10,7 @@ function SignupForm() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("n/a");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   // const [securityQuestion, setSecurityQuestion] = useState("");
@@ -46,13 +46,20 @@ function SignupForm() {
   // },[preSubErr])
 
   if (sessionUser) return <Redirect to="/" />;
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
+      const newUser = {};
+      newUser.username = username;
+      newUser.firstname = firstName;
+      newUser.lastname = lastName;
+      newUser.email = email;
+      if (title) newUser.title = title
+      newUser.password = password;
 
-      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+      return dispatch(sessionActions.signup(newUser))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
