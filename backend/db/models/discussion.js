@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       notEmpty: true,
+      // eventually ill need to add a min length on here of 40
     },
   },
   {});

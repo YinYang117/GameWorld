@@ -17,6 +17,7 @@ const validateDiscussion = [
 
 router.get('/', asyncHandler(async (req, res) => {
   const discussions = await Discussion.findAll();
+  console.log('discussions api', discussions)
   return res.json({ discussions })
 }));
 

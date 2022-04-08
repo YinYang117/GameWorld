@@ -14,7 +14,8 @@ function DiscussionCard({discussion}) {
     // console.log('product', product?.ownerId)
     // console.log('sessionUser', sessionUser?.id)
     // console.log('user is owner:', isOwner)
-  }, [sessionUser, discussion, isOwner]) 
+  }, [dispatch]) 
+// }, [sessionUser, discussion, isOwner]) 
 
   return (
     <>

@@ -17,7 +17,7 @@ const setDiscussions = (discussions) => {
 
 const addDiscussion = (discussion) => {
   return {
-    type: LOAD_DISCUSSIONS,
+    type: LOAD_DISCUSSION,
     payload: discussion,
   }
 }
@@ -38,6 +38,7 @@ export const loadAllDiscussions = () => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
+    console.log('data!#!',data)
     dispatch(setDiscussions(data))
   }
 }

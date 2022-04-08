@@ -49,7 +49,7 @@ export const loadProduct = (id) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    // console.log('load single product in store', data)
+    console.log('load single product in store', data)
     dispatch(addProduct(data))
   }
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from "react-router-dom";
-import * as productActions from '../../store/products'
+import * as productActions from '../../store/products';
+import * as discussionActions from '../../store/discussions';
+import DiscussionCard from "../DiscussionCard";
 import './ProductDetailsPage.css';
 
 function ProductDetailsPage() {
@@ -10,14 +12,10 @@ function ProductDetailsPage() {
   let { productId } = useParams();
   let id = parseInt(productId);
   const sessionUser = useSelector(state => state.session.user);
-  const product = useSelector(state => {
-    if (!state.products[id]) dispatch(productActions.loadProduct(id))
-    return state.products[id]
-    // call for 1 product if not in state
-    // this return isnt the best. if the product still doesnt exist after dispatch...
-  });
+  const allDiscussions = useSelector(state => state.discussions)
+  const product = useSelector(state => state?.products[id]);
+  let ownerId = useSelector(state => state?.products[id]?.ownerId);
 
-  // let ownerData = useSelector(state => state.products[id].ownerId);
   const [productTitle, setProductTitle] = useState(product?.productTitle)
   const [mainIcon, setMainIcon] = useState(product?.mainIcon);
   const [mainImage, setMainImage] = useState(product?.mainImage);
@@ -26,13 +24,16 @@ function ProductDetailsPage() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
 
-  // useEffect(() => {
-  //   dispatch(productActions.loadProduct(id))
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(productActions.loadProduct(id))
+    dispatch(discussionActions.loadAllDiscussions())
+  }, [dispatch]) 
 
   useEffect(() => {
-    setIsOwner(sessionUser?.id === product?.ownerId)
-  }, [sessionUser, product, isOwner]) 
+   setIsOwner(sessionUser?.id === ownerId)
+  //  console.log( 'owner in prod deets',isOwner)
+  }, [product, ownerId]) 
+
 
   const submitProductEdits = () => {
     const newProductData = product;
@@ -83,6 +84,13 @@ function ProductDetailsPage() {
         <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder={product?.description} value={description} />
         <button className="product-edit-submit" type='submit' >Submit Edits</button>
       </form>}
+      <div className="discussion-list-container">
+          {allDiscussions.length > 0 &&
+            Object.values(allDiscussions).map(discussion => 
+              <DiscussionCard key={discussion.id} discussion={discussion} />
+            )
+          }
+        </div>
     </>
   );
 }
