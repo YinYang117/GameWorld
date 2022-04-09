@@ -1,5 +1,19 @@
 .signed-in-container{
   display: flex;
+  align-items: center;
+}
+
+.user-icon{
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.user-icon-button{
+  border-radius: 40px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 50px;
 }
 
 .profile-dropdown{

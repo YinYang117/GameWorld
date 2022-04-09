@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './SignedInUser.css'
 
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -29,8 +30,9 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="user-icon-button" onClick={openMenu}> 
+        <img className='user-icon' src='/images/user.png' alt="User-icon" />
+        {/* <i className="fas fa-user-circle" /> */}
       </button>
         <ul className="profile-dropdown" style={{display: showMenu ? "block" : "none"}}>
           <li>{user.username}</li>
