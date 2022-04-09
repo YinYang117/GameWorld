@@ -13,6 +13,7 @@ function ProductDetailsPage() {
   let id = parseInt(productId);
   const sessionUser = useSelector(state => state.session.user);
   const allDiscussions = useSelector(state => state.discussions)
+
   const product = useSelector(state => state?.products[id]);
   let ownerId = useSelector(state => state?.products[id]?.ownerId);
 

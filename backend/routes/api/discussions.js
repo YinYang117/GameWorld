@@ -52,12 +52,4 @@ router.delete('/:discussionId', asyncHandler(async (req, res) => {
   res.json({})
 }));
 
-// router.delete('/:discussionId', asyncHandler(async (req, res) => {
-//   const discussionId = parseInt(req.params.discussionId, 10);
-//   const doomedDiscussion = await Discussion.findByPk(discussionId);
-//   await doomedDiscussion.destroy();
-//   res.json({})
-//   // ^ do I need this on a delete? no return either...
-// }));
-
 module.exports = router;
