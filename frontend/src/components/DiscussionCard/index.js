@@ -45,7 +45,7 @@ function DiscussionCard({discussion}) {
             }}>
             <input onChange={e => setMesssage(e.target.value)} type="text" className="discussion-message-edit-input" placeholder="New Discussion Message?" value={message} />
             <button className="discussion-edit-submit" type='submit' >Submit Edits</button>
-            {isOwner && <button id="product-delete" onClick={deleteDiscussionSubmit} >Delete</button>}
+            {isOwner && <button className="discussion-delete" onClick={deleteDiscussionSubmit} >Delete</button>}
           </form>
       }
       </div>

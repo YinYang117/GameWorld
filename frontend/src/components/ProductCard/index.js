@@ -17,7 +17,7 @@ function ProductCard({product}) {
   return (
     <>
       <div onClick={handleClick} className="product-card-container" >
-        <img className="product-icon" src={product?.mainIcon} alt={product.mainImageAlt}/>
+        <img className="product-icon" src={product?.mainIcon} alt={`Icon for ${product.productTitle}`}/>
         <div className="product-title-description-container">
           <div className="product-title" >{product.productTitle}</div>
           <div className="product-description" >{shortDesc}</div>

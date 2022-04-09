@@ -65,17 +65,18 @@ function ProductDetailsPage() {
 
   return (
     <>
-      {product && <div className="product-details-page">
+      {product && <div className="product-details">
         <img
           className="product-card-image"
           src={product.mainImage}
           alt={product.mainImageAlt}
         />
-        <div className='product-title'>
+        <h3 className='product-title'>
           {product.productTitle}
-        </div>
+        </h3>
         <div className="product-description">{product?.description}</div>
         <div className='button-container'>
+          {isOwner && <span className="owner-options-text" >Owner Options:</span>}
           {isOwner && <button id="product-edit" onClick={e => setShowEditForm(!showEditForm)}>Edit</button>}
           {isOwner && <button id="product-delete" onClick={deleteProductSubmit} >Delete</button>}
           {/* <button onClick={redirectHome}>Back to Home Page</button> */}
@@ -94,15 +95,15 @@ function ProductDetailsPage() {
         <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder={product?.description} value={description} />
         <button className="product-edit-submit" type='submit' >Submit Edits</button>
       </form>}
+      <div className="new-discussion-starter">
+        Discuss this product!
+      </div>
       <div className="discussion-list-container">
           {Object.keys(allDiscussions).length > 0 &&
             Object.values(allDiscussions).map(discussion => 
               <DiscussionCard key={discussion.id} discussion={discussion} />
             )
           }
-      </div>
-      <div className="new-discussion-starter">
-        Discuss this product!
       </div>
       {sessionUser &&
       <form 

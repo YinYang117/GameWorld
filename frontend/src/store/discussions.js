@@ -56,7 +56,8 @@ export const loadAllDiscussions = () => async (dispatch) => {
 }
 
 export const loadProdDiscussions = (ProdId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/discussions/product/${ProdId}`)
+  const id = parseInt(ProdId)
+  const res = await csrfFetch(`/api/discussions/product/${id}`)
   if (res.ok) {
     const data = await res.json();
     dispatch(setDiscussions(data))

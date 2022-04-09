@@ -1,0 +1,17 @@
+.discussion-edit-submit{
+  background-color: rgba(0, 204, 255, 0.446);
+  font-size: small;
+  min-width: 50px;
+  min-height: 20px;
+  margin: 0px 10px;
+  border-radius: 10px;
+}
+
+.discussion-delete{
+  background-color: rgba(255, 77, 0, 0.446);
+  font-size: small;
+  min-width: 60px;
+  min-height: 20px;
+  margin: 0px 10px;
+  border-radius: 10px;
+}
