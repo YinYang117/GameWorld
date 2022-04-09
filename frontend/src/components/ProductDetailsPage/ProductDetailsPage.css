@@ -43,3 +43,29 @@
   margin: 0px 10px;
   border-radius: 10px;
 }
+
+.new-discussion-starter{
+  display: flex;
+  justify-content: center;
+}
+
+.new-discussion-form{
+  display: flex;
+  justify-content: center;
+  background-color: darkgreen;
+  min-height: 30px;
+  padding: 10px;
+  border-radius: 10%;
+}
+
+.new-discussion-message{
+  min-height: 50px;
+  border-radius: 5px;
+}
+
+.new-discussion-submit{
+  border-radius: 10px;
+  border: solid 3px lightgreen;
+  background-color: aquamarine;
+  font-style: italic;
+}

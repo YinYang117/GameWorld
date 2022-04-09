@@ -95,9 +95,9 @@ function ProductDetailsPage() {
         <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder={product?.description} value={description} />
         <button className="product-edit-submit" type='submit' >Submit Edits</button>
       </form>}
-      <div className="new-discussion-starter">
+      <h3 className="new-discussion-starter">
         Discuss this product!
-      </div>
+      </h3>
       <div className="discussion-list-container">
           {Object.keys(allDiscussions).length > 0 &&
             Object.values(allDiscussions).map(discussion => 
@@ -106,12 +106,12 @@ function ProductDetailsPage() {
           }
       </div>
       {sessionUser &&
-      <form 
+      <form className="new-discussion-form"
         onSubmit={e => {
         e.preventDefault();
         submitNewDiscussion();
         }}>
-        <input className="new-discussion-message" onChange={e => setNewDiscussionMessage(e.target.value)} type="text" placeholder="Share your opinion!" value={newDiscussionMessage} />
+        <input className="new-discussion-message" onChange={e => setNewDiscussionMessage(e.target.value)} type="text-area" placeholder="Share your opinion!" value={newDiscussionMessage} />
         <button className="new-discussion-submit" type='submit' >Submit New Discussion</button>
       </form>}
     </>

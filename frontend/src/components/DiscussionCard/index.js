@@ -23,6 +23,7 @@ function DiscussionCard({discussion}) {
     editedDiscMsg.message = message
 
     dispatch(discussionActions.editDiscussionMsg(editedDiscMsg))
+    
   }
 
   const deleteDiscussionSubmit = () => {
@@ -32,7 +33,7 @@ function DiscussionCard({discussion}) {
   }
 
   return (
-    <>
+    <div className="discussion-card-container" >
       <div className="discussion-message" >
         {discussion.message}
       </div>
@@ -43,13 +44,13 @@ function DiscussionCard({discussion}) {
             e.preventDefault();
             submitDiscussionEdits();
             }}>
-            <input onChange={e => setMesssage(e.target.value)} type="text" className="discussion-message-edit-input" placeholder="New Discussion Message?" value={message} />
+            <input className="discussion-message-edit-input" onChange={e => setMesssage(e.target.value)} type="text-area" placeholder="New Discussion Message?" value={message} />
             <button className="discussion-edit-submit" type='submit' >Submit Edits</button>
             {isOwner && <button className="discussion-delete" onClick={deleteDiscussionSubmit} >Delete</button>}
           </form>
       }
       </div>
-    </>
+    </div>
   );
 }
 
