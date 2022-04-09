@@ -81,16 +81,27 @@ export const deleteDiscussion = (id) => async (dispatch) => {
 // normalize data here for these, vs the products page.
 const initState = {};
 const discussionsReducer = (state = initState, action) => {
-  //// let newState = { ...state };
-  // let newState = Object.assign({}, state);
+  let newState;
   switch (action.type) {
     case LOAD_DISCUSSIONS:
       const objDiscussions = {};
       action.payload.forEach(dis => objDiscussions[dis.id] = dis);
-      return {...state, ...objDiscussions}
+      return {...state, ...objDiscussions};
+    case LOAD_DISCUSSION:
+      newState = {...state};
+      newState[action.payload.id] = action.payload;
+      return newState;
+    case DELETE_DISCUSSION:
+      newState = Object.assign({}, state)
+      delete newState[action.payload]
+      return newState
     default:
       return state;
   }
 }
+
+// const LOAD_DISCUSSIONS = 'discussions/load_discussions';
+// const LOAD_DISCUSSION = 'discussions/load_discussion';
+// const DELETE_DISCUSSION = 'discussions/delete_discussion';
 
 export default discussionsReducer;

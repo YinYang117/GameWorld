@@ -89,7 +89,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 const initState = {};
 
 const productsReducer = (state = initState, action) => {
-  // let newState = { ...state };
+  // let newState = { ...state }; // same as below
   let newState = Object.assign({}, state);
   switch (action.type) {
     case LOAD_PRODUCTS:

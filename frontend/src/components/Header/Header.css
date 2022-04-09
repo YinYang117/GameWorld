@@ -10,9 +10,19 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .nav-item{
   margin: 0px 5px;
   border-radius: 10px;
+}
+
+.home-link{
+  margin-right: 10px;
+}
+
+.logo-gameworld{
+  max-width: 80px;
+  max-height: 80px;
 }

@@ -14,10 +14,14 @@
   align-content: center;
   justify-content: center;
   width: 50px;
+  margin-right: 10px;
 }
 
 .profile-dropdown{
   position: absolute;
+  left:75%;
+  top:4%;
+  font-style: italic;
   background-color: #ffd478;
   min-width: 160px;
   box-shadow: 5px 5px 10px rgb(199, 126, 0);
@@ -25,4 +29,10 @@
   border-radius: 10px;
   padding: 5px 0px 10px 25px;
   z-index: 1;
+}
+
+.logout-button{
+  background-color: brown;
+  color: bisque;
+  border-radius: 5px;
 }

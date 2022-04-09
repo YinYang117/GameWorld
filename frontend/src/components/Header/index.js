@@ -14,12 +14,10 @@ function Navigation({ isLoaded }){
   return (
     <div className="header-container">
       <div className="logo-container">
-        <span>GW Logo</span>
+        <img className="logo-gameworld" src="/images/joystick.png" alt="GameWorld Icon" />
       </div>
       <nav className="nav-container">
-        <div className='nav-item'>
-          <NavLink to="/">Home</NavLink>
-        </div>
+        <NavLink className="home-link" to="/"><i className="fa-solid fa-house" >Home</i></NavLink>
         <div>
           {sessionLinks}
         </div>
