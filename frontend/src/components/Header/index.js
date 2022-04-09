@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import WelcomeModal from '../WelcomeModal'
-import SignedInUser from '../SignedInUser'
+import SignedInUser from './SignedInUser'
 import './Header.css';
 
 function Navigation({ isLoaded }){
