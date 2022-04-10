@@ -23,20 +23,14 @@
   flex-flow: column;
   align-items: left;
   justify-content: left;
-  width: 70vw;
+  width: 50vw;
   height: 70vh;
-}
-
-.form-input{
-  width: fit-content;
 }
 
 .labels-inputs{
   display: flex;
   justify-content: space-between;
-  margin: 5px;
-  font-size: large;
-  
+  margin: 20px;
 }
 
 .button-container{

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../../store/session";
+import "./WelcomeModal.css";
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -140,7 +141,7 @@ function SignupForm() {
         <div className="labels-inputs">
           <label>Confirm Password</label>
           <input
-          className="form-input"
+          className="new-user-form-input"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -148,15 +149,16 @@ function SignupForm() {
             required
           />
         </div>
+        <ul className="errors-list">
+          {/* {preSubErrState.length > 0 && Object.values(preSubErrState).map((preError, idx) => <li key={idx}>{preError}</li>)} */}
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
         <div className="d-flex">
           <button className="signup-button" type="submit">Sign Up</button>
           {/* ^ disabled={Object.keys(preSubErr).length > 0} */}
         </div>
           {/* <button className="cancel-button" onClick={() => (false)}>Cancel</button> */}
-        <ul className="errors-list">
-          {/* {preSubErrState.length > 0 && Object.values(preSubErrState).map((preError, idx) => <li key={idx}>{preError}</li>)} */}
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
+
       </form>
     </div>
   );
