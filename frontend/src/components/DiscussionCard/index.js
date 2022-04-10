@@ -7,6 +7,7 @@ function DiscussionCard({discussion}) {
   const sessionUser = useSelector(state => state.session.user);
   const [isOwner, setIsOwner] = useState('');
   const [message, setMesssage] = useState('');
+  const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
 
 
@@ -19,11 +20,16 @@ function DiscussionCard({discussion}) {
   }, [sessionUser]) 
 
   const submitDiscussionEdits = () => {
-    const editedDiscMsg = discussion;
-    editedDiscMsg.message = message
+    const editedDisc = discussion;
+    editedDisc.message = message
+    setErrors([]);
 
-    dispatch(discussionActions.editDiscussionMsg(editedDiscMsg))
-    
+    dispatch(discussionActions.editDiscussionMsg(editedDisc))
+    .then(() => setMesssage(""))
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
   }
 
   const deleteDiscussionSubmit = () => {
@@ -37,6 +43,7 @@ function DiscussionCard({discussion}) {
       <div className="discussion-message" >
         {discussion.message}
       </div>
+      {errors.map((error, idx) => <span key={idx}>{error}</span>)}
       <div className="hover-edit">
         {isOwner && 
           <form 
@@ -45,8 +52,8 @@ function DiscussionCard({discussion}) {
             submitDiscussionEdits();
             }}>
             <input className="discussion-message-edit-input" onChange={e => setMesssage(e.target.value)} type="text-area" placeholder="Edit this Message?" value={message} />
-            <button className="discussion-edit-submit" type='submit' >Submit Edits</button>
-            {isOwner && <button className="discussion-delete" onClick={deleteDiscussionSubmit} >Delete</button>}
+            <button className="discussion-edit-submit" type='submit' disabled={message.length < 40} >Submit Edits</button>
+            <button className="discussion-delete" onClick={deleteDiscussionSubmit} >Delete</button>
           </form>
       }
       </div>

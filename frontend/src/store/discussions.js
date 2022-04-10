@@ -69,9 +69,8 @@ export const editDiscussionMsg = (editedDiscMsg) => async (dispatch) => {
   const res = await csrfFetch(`/api/discussions/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ message }),
-    })
-  const data = await res.json();
-  dispatch(addDiscussion(data))
+  })
+  if (res.ok) dispatch(addDiscussion(editedDiscMsg))
 }
 
 export const deleteDiscussion = (id) => async (dispatch) => {
@@ -100,9 +99,5 @@ const discussionsReducer = (state = initState, action) => {
       return state;
   }
 }
-
-// const LOAD_DISCUSSIONS = 'discussions/load_discussions';
-// const LOAD_DISCUSSION = 'discussions/load_discussion';
-// const DELETE_DISCUSSION = 'discussions/delete_discussion';
 
 export default discussionsReducer;

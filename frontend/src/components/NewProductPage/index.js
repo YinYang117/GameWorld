@@ -52,24 +52,24 @@ function NewProductPage() {
         <label className='label'>
           Product Title:
         </label>
-        <input onChange={e => setProductTitle(e.target.value)} type="text" className="product-product-title" placeholder='productTitle' value={productTitle} />
+        <input onChange={e => setProductTitle(e.target.value)} type="text" className="new-product-product-title" placeholder='productTitle' value={productTitle} />
         
         <label className='label'>
         Product Icon:
         </label>
-          <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-mainIcon" placeholder='mainIcon' value={mainIcon} />
+          <input onChange={e => setMainIcon(e.target.value)} type="text" className="new-product-mainIcon" placeholder='mainIcon' value={mainIcon} />
         <label className='label'>
         Product Main Image:
         </label>
-          <input onChange={e => setMainImage(e.target.value)} type="text" className="product-mainImage" placeholder='mainImage' value={mainImage} />
+          <input onChange={e => setMainImage(e.target.value)} type="text" className="new-product-mainImage" placeholder='mainImage' value={mainImage} />
         <label className='label'>
         Main Image alt-tag:
         </label>
-          <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="product-mainImageAlt" placeholder='mainImageAlt' value={mainImageAlt} />
+          <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="new-product-mainImageAlt" placeholder='mainImageAlt' value={mainImageAlt} />
         <label className='label'>
           Product Description:
         </label>
-          <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder='description' value={description} />
+          <input onChange={e => setDescription(e.target.value)} type="text" className="new-product-description" placeholder='description' value={description} />
         <ul className="new-product-errors-list">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>

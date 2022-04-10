@@ -42,7 +42,7 @@ router.put('/:discussionId', asyncHandler(async (req, res) => {
   const discussion = await Discussion.findByPk(discussionId);
   discussion.update({ message })
   
-  res.json({})
+  return res.json({})
 }));
 
 router.delete('/:discussionId', asyncHandler(async (req, res) => {

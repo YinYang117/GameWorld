@@ -63,6 +63,9 @@ const [errors, setErrors] = useState([]);
     newDiscussion.message = newDiscussionMessage
 
     dispatch(discussionActions.newDiscussion(newDiscussion))
+    .then(() => {
+      setNewDiscussionMessage('')
+    })
     .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
