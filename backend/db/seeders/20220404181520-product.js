@@ -27,6 +27,22 @@ module.exports = {
           mainImageAlt: "The Game of Hex",
           description: "Hex is a connection strategy game for two players.",
         },
+        {
+          ownerId: '1',
+          productTitle: 'StickMan',
+          mainIcon: "https://img.poki.com/cdn-cgi/image/quality=78,width=204,height=204,fit=cover,f=auto/3b3f4aeacf600fd3910f1c3d513c0636.png",
+          mainImage: "https://whatnerd.com/wp-content/uploads/2021/06/best-stickman-stick-figure-mobile-games-android-iphone-featured.jpg",
+          mainImageAlt: "Stick Man Game",
+          description: "Stickman is actually a whole genre of games based off a classic stick figure!",
+        },
+        {
+          ownerId: '1',
+          productTitle: 'StarCraft 2',
+          mainIcon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGbVoKe5DxxumvARiKV7VUYbovVpYLQ1fZFg&usqp=CAU",
+          mainImage: "https://cdn.mos.cms.futurecdn.net/7Zc2rbYvHQzz54q8a9dQDg.jpg",
+          mainImageAlt: "StarCraft 2",
+          description: "StarCraft II is a sequel to the PC based Real Time Strategy game StarCraft: Brood War made by Blizzard Entertainment. It is split into three installments: the base game with the subtitle Wings of Liberty, and two expansion packs, Heart of the Swarm and Legacy of the Void.",
+        },
     ], {});
   },
 
