@@ -25,12 +25,22 @@ function ProductDetailsPage() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [newDiscussionMessage, setNewDiscussionMessage] = useState('')
-const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [thisProdDisc, setThisProdDisc] = useState([]);
 
   useEffect(() => {
     dispatch(productActions.loadProduct(id))
     dispatch(discussionActions.loadProdDiscussions(id))
   }, [dispatch]) 
+
+  useEffect(() => {
+    let discs = [];
+    setThisProdDisc(discs)
+    Object.values(allDiscussions).forEach(discussion => {
+      if (discussion.productId === id) discs.push(discussion)
+    })
+    setThisProdDisc(discs)
+  },[allDiscussions])
 
   useEffect(() => {
    setIsOwner(sessionUser?.id === ownerId)
@@ -108,8 +118,8 @@ const [errors, setErrors] = useState([]);
         Discuss this product!
       </h3>
       <div className="discussion-list-container">
-          {Object.keys(allDiscussions).length > 0 &&
-            Object.values(allDiscussions).map(discussion => 
+          {thisProdDisc.length > 0 &&
+            thisProdDisc.map(discussion => 
               <DiscussionCard key={discussion.id} discussion={discussion} />
             )
           }
