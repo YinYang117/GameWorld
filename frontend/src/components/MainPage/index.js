@@ -15,17 +15,16 @@ function MainPage() {
     dispatch(productActions.loadProducts())
   },[dispatch]);
 
-  const newSpot = () => {
+  const newProduct = () => {
     history.push('/products/new')
   }
 
   return (
     <>
       <div className="main">
-        <div>Main Page</div>
-        <div>Game World</div>
+        <h1 className="h1" >~~''-- Game World --''~~</h1>
         {sessionUser &&
-          <button onClick={newSpot}>Create new spot</button>
+          <button className="new-product-button" onClick={newProduct}>Create new spot</button>
         }
         <div className="product-list-container">
           {products &&

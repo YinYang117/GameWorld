@@ -15,6 +15,7 @@ function NewProductPage() {
   const [mainImage, setMainImage] = useState("");
   const [mainImageAlt, setMainImageAlt] = useState("");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     if (!sessionUser) history.push('/')
@@ -22,6 +23,7 @@ function NewProductPage() {
 
   const submitNewProduct = () => {
     const newProductData = {};
+    setErrors([]);
     setOwnerId(sessionUser.id)
     newProductData.ownerId = ownerId
     newProductData.productTitle = productTitle
@@ -31,29 +33,49 @@ function NewProductPage() {
     newProductData.description = description
 
     dispatch(productActions.newProduct(newProductData))
+    .then(() => history.push('/'))
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
   };
 
   return (
-    <>
-      <p>
-        Sup Ryan. How am I doing?
-      </p>
-      <div>
-        So far, doing well
-      </div>
+    <div className="new-product-page" >
+      <h2>Welcome to the Create a New Product Page!</h2>
       <form
+      className="new-product-form"
         onSubmit={e => {
         e.preventDefault();
         submitNewProduct();
         }}>
+        <label className='label'>
+          Product Title:
+        </label>
         <input onChange={e => setProductTitle(e.target.value)} type="text" className="product-product-title" placeholder='productTitle' value={productTitle} />
-        <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-mainIcon" placeholder='mainIcon' value={mainIcon} />
-        <input onChange={e => setMainImage(e.target.value)} type="text" className="product-mainImage" placeholder='mainImage' value={mainImage} />
-        <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="product-mainImageAlt" placeholder='mainImageAlt' value={mainImageAlt} />
-        <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder='description' value={description} />
+        
+        <label className='label'>
+        Product Icon:
+        </label>
+          <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-mainIcon" placeholder='mainIcon' value={mainIcon} />
+        <label className='label'>
+        Product Main Image:
+        </label>
+          <input onChange={e => setMainImage(e.target.value)} type="text" className="product-mainImage" placeholder='mainImage' value={mainImage} />
+        <label className='label'>
+        Main Image alt-tag:
+        </label>
+          <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="product-mainImageAlt" placeholder='mainImageAlt' value={mainImageAlt} />
+        <label className='label'>
+          Product Description:
+        </label>
+          <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder='description' value={description} />
+        <ul className="new-product-errors-list">
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
         <button className="product-edit-submit" type='submit' >Submit New Product</button>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -3,10 +3,24 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  height: 100vh;
-  margin-bottom: 50px;
+  min-height: 95vh;
 }
 
 .product-list-container{
   margin: 10px;
+}
+
+.h1{
+  color: rgb(167, 78, 0);
+  font-weight: 900;
+  font-size: xxx-large;
+}
+
+.new-product-button{
+  width: 50%;
+  height: 60px;
+  font-size: x-large;
+  background-color: lightblue;
+  border-radius: 35% 10px 35% 10px;
+  box-shadow: rgba(22, 134, 125, 0.647) 0px 20px 30px -10px;
 }

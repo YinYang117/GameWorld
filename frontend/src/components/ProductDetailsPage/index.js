@@ -25,6 +25,7 @@ function ProductDetailsPage() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [newDiscussionMessage, setNewDiscussionMessage] = useState('')
+const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(productActions.loadProduct(id))
@@ -56,11 +57,16 @@ function ProductDetailsPage() {
 
   const submitNewDiscussion = () => {
     const newDiscussion = {};
+    setErrors([]);
     newDiscussion.userId = sessionUser.id
     newDiscussion.productId = productId
     newDiscussion.message = newDiscussionMessage
 
     dispatch(discussionActions.newDiscussion(newDiscussion))
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
   }
 
   return (
@@ -106,14 +112,19 @@ function ProductDetailsPage() {
           }
       </div>
       {sessionUser &&
-      <form className="new-discussion-form"
-        onSubmit={e => {
-        e.preventDefault();
-        submitNewDiscussion();
-        }}>
-        <input className="new-discussion-message" onChange={e => setNewDiscussionMessage(e.target.value)} type="text-area" placeholder="Share your opinion!" value={newDiscussionMessage} />
-        <button className="new-discussion-submit" type='submit' >Submit New Discussion</button>
-      </form>}
+      <>
+        <ul className="new-product-errors-list">
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <form className="new-discussion-form"
+          onSubmit={e => {
+          e.preventDefault();
+          submitNewDiscussion();
+          }}>
+          <input className="new-discussion-message" onChange={e => setNewDiscussionMessage(e.target.value)} type="text-area" placeholder="Share your opinion!" value={newDiscussionMessage} />
+          <button className="new-discussion-submit" type='submit' >Submit New Discussion</button>
+        </form>
+      </>}
     </>
   );
 }

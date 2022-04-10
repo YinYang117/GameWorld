@@ -44,7 +44,7 @@ function DiscussionCard({discussion}) {
             e.preventDefault();
             submitDiscussionEdits();
             }}>
-            <input className="discussion-message-edit-input" onChange={e => setMesssage(e.target.value)} type="text-area" placeholder="New Discussion Message?" value={message} />
+            <input className="discussion-message-edit-input" onChange={e => setMesssage(e.target.value)} type="text-area" placeholder="Edit this Message?" value={message} />
             <button className="discussion-edit-submit" type='submit' >Submit Edits</button>
             {isOwner && <button className="discussion-delete" onClick={deleteDiscussionSubmit} >Delete</button>}
           </form>
