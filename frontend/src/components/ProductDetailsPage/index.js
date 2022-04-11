@@ -103,6 +103,7 @@ function ProductDetailsPage() {
       </div>}
       {showEditForm && isOwner &&
       <form 
+        
         onSubmit={e => {
         e.preventDefault();
         submitProductEdits();
