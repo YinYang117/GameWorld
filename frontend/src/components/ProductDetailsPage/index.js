@@ -26,6 +26,7 @@ function ProductDetailsPage() {
   const [isOwner, setIsOwner] = useState(false);
   const [newDiscussionMessage, setNewDiscussionMessage] = useState('')
   const [errors, setErrors] = useState([]);
+  const [editErrors,setEditErrors] = useState([]);
   const [thisProdDisc, setThisProdDisc] = useState([]);
 
   useEffect(() => {
@@ -57,7 +58,13 @@ function ProductDetailsPage() {
     if (description) newProductData.description = description
 
     dispatch(productActions.editProduct(newProductData))
-    setShowEditForm(!showEditForm)
+    .then(() => setShowEditForm(!showEditForm))
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setEditErrors(data.errors);
+    });
+
+
   };
 
   const deleteProductSubmit = () => {
@@ -103,16 +110,34 @@ function ProductDetailsPage() {
       </div>}
       {showEditForm && isOwner &&
       <form 
-        
+        className="new-product-form"
         onSubmit={e => {
         e.preventDefault();
         submitProductEdits();
         }}>
-        <input onChange={e => setProductTitle(e.target.value)} type="text" className="product-product-title" placeholder={product?.productTitle} value={productTitle} />
-        <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-mainIcon" placeholder={product?.mainIcon} value={mainIcon} />
-        <input onChange={e => setMainImage(e.target.value)} type="text" className="product-mainImage" placeholder={product?.mainImage} value={mainImage} />
-        <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="product-mainImageAlt" placeholder={product?.mainImageAlt} value={mainImageAlt} />
-        <input onChange={e => setDescription(e.target.value)} type="text" className="product-description" placeholder={product?.description} value={description} />
+        <ul className="new-product-errors-list">
+            {editErrors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <label className='label'>
+          Product Title:
+        </label>
+        <input onChange={e => setProductTitle(e.target.value)} type="text" className="product-edits" placeholder={product?.productTitle} value={productTitle} />
+        <label className='label'>
+        Product Icon:
+        </label>
+        <input onChange={e => setMainIcon(e.target.value)} type="text" className="product-edits" placeholder={product?.mainIcon} value={mainIcon} />
+        <label className='label'>
+        Product Main Image:
+        </label>
+        <input onChange={e => setMainImage(e.target.value)} type="text" className="product-edits" placeholder={product?.mainImage} value={mainImage} />
+        <label className='label'>
+        Main Image alt-tag:
+        </label>
+        <input onChange={e => setMainImageAlt(e.target.value)} type="text" className="product-edits" placeholder={product?.mainImageAlt} value={mainImageAlt} />
+        <label className='label'>
+          Product Description:
+        </label>
+        <input onChange={e => setDescription(e.target.value)} type="text" className="product-edits" placeholder={product?.description} value={description} />
         <button className="product-edit-submit" type='submit' >Submit Edits</button>
       </form>}
       <h3 className="new-discussion-starter">

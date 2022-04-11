@@ -73,8 +73,11 @@ export const editProduct = (editedProduct) => async (dispatch) => {
       method: 'PUT',
       body: JSON.stringify({ ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description }),
     })
-  const data = await res.json();
-  dispatch(addProduct(data))
+  
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addProduct(data))
+  }
 }
 
 export const deleteProduct = (id) => async (dispatch) => {
