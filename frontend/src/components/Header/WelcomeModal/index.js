@@ -29,7 +29,6 @@ function WelcomeModal() {
           <SignupForm />
         </Modal>
       )}
-      <button className="nav-item" onClick={() => loginDemo()}>Demo User</button>
     </>
   );
 }

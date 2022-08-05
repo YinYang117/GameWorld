@@ -30,6 +30,7 @@ const removeProduct = (id) => {
   };
 }; 
 
+// end of actions
 /////////////////////////////////////////
 // thunks return a function that returns an action
 
@@ -57,7 +58,9 @@ export const newProduct = (newProduct) => async (dispatch) => {
   const { ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description } = newProduct
   const res = await csrfFetch('/api/products/new', {
       method: 'POST',
-      body: JSON.stringify({ ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description }),
+      body: JSON.stringify({ 
+        ownerId, productTitle, mainIcon, mainImage, mainImageAlt, description 
+      }),
   })
 
   if (res.ok) {
