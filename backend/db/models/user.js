@@ -81,6 +81,7 @@ module.exports = (sequelize, DataTypes) => {
   User.getCurrentUserById = async function (id) { // returns scoped 'current user' based off id
     return await User.scope('currentUser').findByPk(id);
   };
+      <button className="nav-item" onClick={() => loginDemo()}>Demo User</button>
 
   User.login = async function ({ credential, password }) { // takes obj arg
     const { Op } = require('sequelize');
