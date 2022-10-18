@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: [3, 60],
-        isNotEmail(value) {if (Validator.isEmail(value)) throw new Error('Cannot be an email.')}
+        isNotEmail(value) { if (Validator.isEmail(value)) throw new Error('Cannot be an email.') }
       }
     },
     email: {
@@ -81,7 +81,6 @@ module.exports = (sequelize, DataTypes) => {
   User.getCurrentUserById = async function (id) { // returns scoped 'current user' based off id
     return await User.scope('currentUser').findByPk(id);
   };
-      <button className="nav-item" onClick={() => loginDemo()}>Demo User</button>
 
   User.login = async function ({ credential, password }) { // takes obj arg
     const { Op } = require('sequelize');
@@ -110,7 +109,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     return await User.scope('currentUser').findByPk(user.id);
   };
-  
+
   User.associate = function (models) {
     User.hasMany(models.Product, { foreignKey: 'ownerId', onDelete: 'cascade', hooks: true })
     User.hasMany(models.Discussion, { foreignKey: 'userId', onDelete: 'cascade', hooks: true })
