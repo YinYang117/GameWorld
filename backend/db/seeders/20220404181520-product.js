@@ -1,8 +1,14 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = "my-game-world-site";
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Products', [
+    options.tableName = "Products";
+      return queryInterface.bulkInsert(options, [
         {
           ownerId: '1',
           productTitle: 'Civilization',
@@ -47,6 +53,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Products', {}, {});
+    options.tableName = "Products";
+    return queryInterface.bulkDelete(options);
   }
 };
