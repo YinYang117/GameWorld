@@ -2,7 +2,7 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = "my-game-world-site";
+  options.schema = "my_game_world_site";
 }
 
 module.exports = {
