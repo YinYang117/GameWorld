@@ -23,7 +23,7 @@
     "dialect": "mysql",
     "operatorsAliases": false,
     "define": {
-      "schema": "my_game_world_site"
+      "schema": "my-game-world-site"
     }
   }
 }
